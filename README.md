@@ -89,7 +89,7 @@ The deployment setup includes:
 5. **Start the Server:**
     ```python
     python manage.py runserver
-### Project Structure
+## Project Structure
     
     ├── ai_paragraph_generator
     │   ├── settings.py         # Django settings (AWS, S3, Database configuration)
@@ -101,8 +101,8 @@ The deployment setup includes:
     └── README.md               # Project documentation
     
 
-### Contact
+## Contact
 **Creator:** Sagar Kundu
 
-**GitHub:** github.com/sa001gar
+**GitHub:** [visit profile](github.com/sa001gar)  
 **Website:** [sagarkundu.live](https://sagarkundu.live)
