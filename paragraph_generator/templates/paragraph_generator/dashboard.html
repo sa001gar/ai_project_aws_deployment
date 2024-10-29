@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Dashboard</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7fafc; /* Very light gray background */
+            color: #333;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px; /* Maximum width */
+            margin: 2rem auto; /* Centered */
+            padding: 1rem;
+        }
+
+        /* Card styles */
+        .card {
+            background: white;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow */
+            padding: 2rem;
+            position: relative; /* For absolute positioning of logout */
+        }
+
+        /* Header styles */
+        .header {
+            font-size: 2rem; /* Base size */
+            font-weight: bold;
+            color: #4c51bf; /* Indigo color */
+            margin-bottom: 1.5rem; /* Increased spacing */
+        }
+
+        /* Username styles */
+        .username {
+            font-weight: bold;
+            color: #4c51bf; /* Indigo color */
+            margin-bottom: 1rem; /* Increased spacing */
+        }
+
+        /* Logout button styles */
+        .logout-button {
+            background-color: #e53e3e; /* Red color */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none;
+            float: right; /* Align to the right */
+            transition: background-color 0.3s ease;
+            margin-bottom: 1.5rem; /* Spacing below the button */
+        }
+
+        .logout-button:hover {
+            background-color: #c53030; /* Darker red on hover */
+        }
+
+        /* Daily stats box */
+        .stats {
+            background-color: #ebf8ff; /* Light blue background */
+            padding: 1rem;
+            border-radius: 8px; /* Rounded corners */
+            margin-bottom: 1.5rem; /* Spacing below stats */
+        }
+
+        /* Result styles */
+        .result {
+            margin-top: 1rem;
+        }
+
+        /* Content styles */
+        .content {
+            border: 1px solid #cbd5e0; /* Light gray border */
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem; /* Increased spacing */
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem; /* Increased spacing */
+        }
+
+        .content-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Button styles */
+        .generate-button {
+            display: inline-block;
+            background-color: #4c51bf; /* Indigo color */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 1.5rem; /* Increased spacing above the button */
+        }
+
+        .generate-button:hover {
+            background-color: #434190; /* Darker indigo */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 1.5rem; /* Smaller size for smaller screens */
+            }
+
+            .username {
+                font-size: 0.9rem; /* Smaller size for username */
+            }
+
+            .logout-button {
+                font-size: 0.9rem; /* Smaller size for button */
+                padding: 0.4rem 0.8rem; /* Smaller padding */
+                margin-bottom: 1rem; /* Adjusted spacing */
+            }
+
+            .generate-button {
+                font-size: 0.9rem; /* Smaller size for button */
+                padding: 0.5rem 1rem; /* Smaller padding */
+                margin-top: 1rem; /* Adjusted spacing */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 1.25rem; /* Even smaller for small screens */
+            }
+
+            .content-header {
+                flex-direction: column; /* Stack content header items */
+            }
+
+            .logout-button {
+                font-size: 0.8rem; /* Even smaller size for button */
+                margin-bottom: 0.8rem; /* Adjusted spacing */
+            }
+
+            .generate-button {
+                font-size: 0.8rem; /* Even smaller size for button */
+                margin-top: 1rem; /* Adjusted spacing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="header">Your Generated Content</h1>
+            <span class="username">Hello, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+
+            <div class="stats">
+                <h2 class="font-semibold">Daily Stats</h2>
+                <p>Remaining requests: {{ remaining_requests }}/50</p>
+                <p>Total generations: {{ total_generations }}</p>
+            </div>
+
+            <div class="space-y-6">
+                {% for content in user_content %}
+                <div class="content">
+                    <div class="content-header">
+                        <h3 class="font-semibold">{{ content.topic }}</h3>
+                        <span class="content-info">{{ content.created_at|date:"M d, Y H:i" }}</span>
+                    </div>
+                    <p>{{ content.content }}</p>
+                    <div class="content-info">
+                        <p>Grade Level: {{ content.grade_level }}</p>
+                        <p>Style: {{ content.style }}</p>
+                        <p>Tone: {{ content.tone }}</p>
+                        <p>Word Count: {{ content.word_count }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-gray-500">No content generated yet.</p>
+                {% endfor %}
+            </div>
+            <a href="{% url 'generate_paragraph' %}" class="generate-button">Generate More Content</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/paragraph_generator/generate.css' %}"><!-- Link to the custom CSS -->
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="header">AI Paragraph Generator</h1>
+            <div class="requests-info">
+                <p>Remaining requests today: <span id="remainingRequests" class="highlight">{{ remaining_requests }}</span></p>
+            </div>
+            <a href="{% url 'index' %}" class="back-link">Back to Home</a>
+            <a href="{% url 'dashboard' %}" class="Dashboard">Dashboard</a>
+            <a href="/logout" class="logout-link">Logout</a>
+            
+            
+            <form id="generateForm">
+                <div class="form-group">
+                    <label for="topic">Topic:</label>
+                    <input type="text" id="topic" name="topic" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grade_level">Grade Level:</label>
+                    <select id="grade_level" name="grade_level">
+                        <option value="elementary">Elementary School</option>
+                        <option value="middle">Middle School</option>
+                        <option value="high school" selected>High School</option>
+                        <option value="college">College</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tone">Tone:</label>
+                    <select id="tone" name="tone">
+                        <option value="neutral" selected>Neutral</option>
+                        <option value="friendly">Friendly</option>
+                        <option value="professional">Professional</option>
+                        <option value="enthusiastic">Enthusiastic</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="style">Style:</label>
+                    <select id="style" name="style">
+                        <option value="informative" selected>Informative</option>
+                        <option value="narrative">Narrative</option>
+                        <option value="analytical">Analytical</option>
+                        <option value="persuasive">Persuasive</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="word_limit">Word Limit:</label>
+                    <input type="number" id="word_limit" name="word_limit" min="50" max="500" value="200">
+                </div>
+                
+                <button type="submit" class="submit-button">Generate Paragraph</button>
+            </form>
+            
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Paragraph Generator. All Rights Reserved.</p>
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Help</a>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $('#generateForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const submitButton = $(this).find('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Generating...');
+                
+                $.ajax({
+                    url: '{% url "generate_paragraph" %}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        $('#result').html(` 
+                            <div class="result-success">
+                                <h3>Generated Paragraph:</h3>
+                                <p class="generated-text">${response.content}</p>
+                                <p class="word-count">Word count: <span>${response.word_count}</span></p>
+                                <p class="remaining-requests">Remaining requests: <span>${response.remaining_requests}</span></p>
+                            </div>
+                        `);
+                        $('#remainingRequests').text(response.remaining_requests);
+                    },
+                    error: function(xhr) {
+                        $('#result').html(` 
+                            <div class="result-error">
+                                <p>Error: ${xhr.responseJSON?.message || 'Something went wrong'}</p>
+                            </div>
+                        `);
+                    },
+                    complete: function() {
+                        submitButton.prop('disabled', false).text('Generate Paragraph');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

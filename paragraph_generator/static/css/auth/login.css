@@ -1,0 +1,156 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7fafc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* Container styles */
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Card styles */
+.login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* Application name */
+.app-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4c51bf;
+    margin-bottom: 0.5rem;
+}
+
+/* Helper message */
+.helper-message {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+/* Alert styles */
+.alert-container {
+    margin-bottom: 1rem;
+}
+
+.alert {
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.alert-success {
+    background-color: #c6f6d5;
+    border: 1px solid #b6e6c1;
+    color: #2f855a;
+}
+
+.alert-error {
+    background-color: #fed7e2;
+    border: 1px solid #fbbfca;
+    color: #e53e3e;
+}
+
+/* Form styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4c51bf;
+}
+
+/* Button styles */
+.submit-button {
+    padding: 0.75rem;
+    background-color: #4c51bf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #434190;
+}
+
+/* Sign-up prompt */
+.signup-prompt {
+    margin-top: 1rem;
+}
+
+.signup-link {
+    color: #4c51bf;
+    font-weight: bold;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Error message */
+.error-message {
+    color: #e53e3e;
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .login-card {
+        padding: 1rem;
+    }
+
+    .app-name {
+        font-size: 1.4rem;
+    }
+
+    .helper-message {
+        font-size: 0.85rem;
+    }
+
+    .submit-button {
+        font-size: 0.9rem;
+    }
+}

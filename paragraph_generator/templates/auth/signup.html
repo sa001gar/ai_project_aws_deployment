@@ -1,0 +1,160 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/auth/signup.css' %}"> <!-- Link to your custom CSS -->
+</head>
+<body>
+    <div class="container">
+        <div class="signup-card">
+            <h1 class="app-name">AI Paragraph Generator</h1>
+            <h2 class="header">Create Account</h2>
+            <p class="help-message">Please fill out the form below to create your account.</p>
+    
+            <form method="post" class="form" onsubmit="return validateForm();">
+                {% csrf_token %}
+    
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" required>
+                    {% if form.username.errors %}
+                    <p class="error-message">{{ form.username.errors.0 }}</p>
+                    {% endif %}
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" required>
+                    {% if form.email.errors %}
+                    <p class="error-message">{{ form.email.errors.0 }}</p>
+                    {% endif %}
+                </div>
+    
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" name="password1" required>
+                    {% if form.password1.errors %}
+                    <p class="error-message">{{ form.password1.errors.0 }}</p>
+                    {% endif %}
+                    <div class="password-strength"></div> <!-- For displaying password strength messages -->
+                    <ul class="password-policy">
+                        <li>Must contain characters</li>
+                        <li>Must contain numbers</li>
+                        <li>Must contain symbols</li>
+                    </ul>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" required>
+                    {% if form.password2.errors %}
+                    <p class="error-message">{{ form.password2.errors.0 }}</p>
+                    {% endif %}
+                </div>
+    
+                {% if form.non_field_errors %}
+                <div class="error-message">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+    
+                <div class="error-message"></div> <!-- This will be used to display validation errors -->
+                <button type="submit" class="submit-button">Sign Up</button>
+            </form>
+    
+            <div class="login-prompt">
+                <p>Already have an account? 
+                    <a href="{% url 'login' %}" class="login-link">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const password1Input = document.querySelector('input[name="password1"]');
+            const password2Input = document.querySelector('input[name="password2"]');
+            const errorMessageContainer = document.querySelector('.error-message');
+        
+            // Function to check password strength
+            function checkPasswordStrength(password) {
+                const strengthMessage = document.querySelector('.password-strength');
+                const strongPolicy = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/; // Example policy
+        
+                if (password.length < 8) {
+                    strengthMessage.innerHTML = '<p>Password is too short. Minimum 8 characters required.</p>';
+                    return false;
+                } else if (!strongPolicy.test(password)) {
+                    strengthMessage.innerHTML = '<p>Password must contain letters, numbers, and special characters.</p>';
+                    return false;
+                } else {
+                    strengthMessage.innerHTML = '<p>Password is strong!</p>';
+                    return true;
+                }
+            }
+        
+            // Add event listener to track password strength
+            password1Input.addEventListener('input', function() {
+                checkPasswordStrength(password1Input.value);
+            });
+        
+            // Validate form function
+            function validateForm() {
+                // Clear previous error messages
+                errorMessageContainer.innerHTML = ''; 
+        
+                // Retrieve input values
+                const usernameInput = document.querySelector('input[name="username"]');
+                const password1 = password1Input.value;
+                const password2 = password2Input.value;
+        
+                // Clear any existing error styles
+                usernameInput.classList.remove('error');
+                password1Input.classList.remove('error');
+                password2Input.classList.remove('error');
+        
+                // Username validation (dummy check, should be replaced with AJAX call)
+                const existingUsernames = ["testuser", "john_doe"]; // Sample existing usernames
+                const username = usernameInput.value.trim();
+                if (existingUsernames.includes(username)) {
+                    usernameInput.classList.add('error');
+                    errorMessageContainer.innerHTML += '<p>This username is already taken. Please choose another.</p>';
+                    return false; // Prevent form submission
+                }
+        
+                // Password strength validation
+                if (!checkPasswordStrength(password1)) {
+                    password1Input.classList.add('error');
+                    return false; // Prevent form submission
+                }
+        
+                // Confirm password validation
+                if (password1 !== password2) {
+                    password2Input.classList.add('error');
+                    errorMessageContainer.innerHTML += '<p>Passwords do not match. Please try again.</p>';
+                    return false; // Prevent form submission
+                }
+        
+                // If all validations pass, allow form submission
+                return true; 
+            }
+        
+            // Attach form submission event listener
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Prevent submission if validation fails
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>

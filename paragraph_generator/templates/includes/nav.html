@@ -1,0 +1,32 @@
+<nav class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between h-16">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="{% url 'dashboard' %}" class="text-xl font-bold text-blue-600">
+                        Paragraph Generator
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex items-center">
+                {% if user.is_authenticated %}
+                    <span class="text-gray-700 mr-4">Welcome, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" 
+                       class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" 
+                       class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                        Login
+                    </a>
+                    <a href="{% url 'signup' %}" 
+                       class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                        Sign Up
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Paragraph Generator - Welcome</title>
+    <link rel="icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/paragraph_generator/index.css' %}"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+    <!-- Navigation bar -->
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="{%static 'images/logo.png'%}" alt="AI Paragraph Generator Logo" class="logo">
+            <h1 class="project-name">AI Paragraph Generator</h1>
+        </div>
+        <div class="nav-buttons">
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main welcome section -->
+    <section class="welcome-section">
+        <h2>Welcome to AI Paragraph Generator</h2>
+        <p>Helping students craft unique, quality paragraphs that boost their writing skills.</p>
+        <p>Explore how our AI-powered tool enhances creativity and efficiency in writing assignments.</p>
+        <a href="{% url 'login' %}" class="btn-primary">Get Started</a>
+    </section>
+
+    <!-- Features & Value Section -->
+    <section class="features-section">
+        <div class="feature">
+            <h3>Purpose</h3>
+            <p>Designed for students to get paragraph inspiration, save time, and improve writing.</p>
+        </div>
+        <div class="feature">
+            <h3>Value</h3>
+            <p>Generate unique, plagiarism-free paragraphs that encourage better learning and practice.</p>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <h3>Your Suggestions</h3>
+        <p>We'd love to hear your thoughts on how we can make AI Paragraph Generator even better!</p>
+        
+        <div class="ratings">
+            <span class="rating">⭐️⭐️⭐️⭐️⭐️</span>
+            <p>Our users love it! Help us keep improving by sharing your feedback.</p>
+        </div>
+    
+        {% comment %} <form class="feedback-form" id="feedbackForm" onsubmit="return validateForm()"> {% endcomment %}
+        <form class="feedback-form" id="feedbackForm" onsubmit="return error_alert()">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="suggestion">Your Suggestion:</label>
+                <textarea id="suggestion" name="suggestion" rows="4" required></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label for="rating">Your Rating:</label>
+                <div class="rating-input">
+                    <input type="radio" name="rating" value="1" required> ⭐
+                    <input type="radio" name="rating" value="2"> ⭐⭐
+                    <input type="radio" name="rating" value="3"> ⭐⭐⭐
+                    <input type="radio" name="rating" value="4"> ⭐⭐⭐⭐
+                    <input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐
+                </div>
+            </div>
+    
+            <button type="submit" class="btn-submit">Submit Feedback</button>
+        </form>
+    </section>
+
+    <!-- Footer with SVG graphics -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 AI Paragraph Generator. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/sagarkundu._/" target="_blank" >
+                    <img src="{%static 'images/instagram.svg'%}" alt="Instagram">
+                </a>
+                <a href="https://github.com/sa001gar" target="_blank">
+                    <img src="{%static 'images/github.svg'%}" alt="Github">
+                </a>
+                <a href="https://www.linkedin.com/in/sagarkundu/" target="_blank">
+                    <img src="{%static 'images/linkedin.svg'%}" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        function validateForm() {
+    const name = document.getElementById("name").value.trim();
+    const suggestion = document.getElementById("suggestion").value.trim();
+    const rating = document.querySelector('input[name="rating"]:checked');
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return false;
+    }
+    if (suggestion === "") {
+        alert("Please provide a suggestion.");
+        return false;
+    }
+    if (!rating) {
+        alert("Please select a rating.");
+        return false;
+    }
+    return true;
+}
+
+    
+function error_alert(){
+    alert("I do not get much time to implement this feature.\nHope You understand I will implement it later. ")
+    return false;
+}
+    </script>
+
+</body>
+</html>

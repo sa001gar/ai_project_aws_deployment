@@ -1,0 +1,292 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    accent-color: #4c51bf; /* Indigo color */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7fafc; /* Very light gray background */
+    color: #333;
+    font-size: 16px; /* Base font size */
+}
+
+/* Container styles */
+.container {
+    max-width: 888px; /* Use a percentage for responsiveness */
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Card styles */
+.card {
+    background: white;
+    border-radius: 0.5rem; /* Use rem for consistent sizing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Header styles */
+.header {
+    font-size: 2.5rem; /* Larger size for modern look */
+    font-weight: bold;
+    color: #4c51bf; /* Indigo color */
+    margin-bottom: 1rem;
+}
+
+/* Request info styles */
+.requests-info {
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #4c51bf; /* Indigo color */
+}
+
+/* Form styles */
+form{
+    margin-top: 1rem;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #4a5568; /* Darker gray for labels */
+    font-size: 1.2rem; /* Larger font size for labels */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem; /* Increased padding for better touch */
+    border: 1px solid #cbd5e0; /* Light gray */
+    border-radius: 0.5rem; /* Use rem for consistency */
+    font-size: 1rem; /* Base font size */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4c51bf; /* Focus border color */
+}
+
+/* Button styles */
+.submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4c51bf; /* Indigo color */
+    color: white;
+    border: none;
+    border-radius: 0.5rem; /* Use rem for consistency */
+    font-size: 1.2rem; /* Larger button font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #434190; /* Darker indigo */
+}
+
+/* Result styles */
+.result {
+    margin-top: 1rem;
+}
+
+.result-success {
+    background-color: #e6fffa; /* Light teal */
+    border: 1px solid #b2f5ea; /* Light teal border */
+    border-radius: 0.5rem; /* Use rem for consistency */
+    padding: 1rem;
+    font-size: 1.1rem; /* Slightly larger font size for results */
+}
+
+
+.result-success>h3{
+    margin: 0.5rem 0;
+    margin-bottom: 5px;
+}
+
+.word-count {
+    color: #4b4d50; /* Blue color */
+    font-size:0.7rem;
+    /* color:#4c51bf; */
+    margin-top:1rem;
+}
+
+.remaining-requests {
+    color: #4b4d50; /* Blue color */
+    font-size:0.7rem;
+    /* color:#4c51bf; */
+    /* margin-top:1rem; */
+}
+
+.result-error {
+    background-color: #fff5f5; /* Light red */
+    border: 1px solid #fed7e2; /* Light red border */
+    border-radius: 0.5rem; /* Use rem for consistency */
+    padding: 1rem;
+    color: #e53e3e; /* Red color */
+}
+
+/* Word count and remaining requests styles */
+.word-count, .remaining-requests {
+    font-size: 1.1rem; /* Larger size for visibility */
+    font-weight: bold;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #2d3748; /* Dark gray */
+    color: white;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    text-align: center;
+    font-size: 0.9rem; /* Make footer content font smaller */
+}
+
+.footer-content a {
+    color: #a0aec0; /* Light gray */
+    text-decoration: none;
+}
+
+.footer-content p {
+    margin: 0.5rem 0;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Link styles */
+.back-link, .logout-link, .Dashboard {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4c51bf; /* Indigo color */
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem; /* Use rem for consistency */
+    font-size: 1rem; /* Base font size */
+    transition: background-color 0.3s ease;
+}
+
+.logout-link {
+    background-color: #e53e3e; /* Red color */
+}
+
+.logout-link:hover {
+    background-color: #c53030; /* Darker red */
+}
+
+.back-link:hover, .Dashboard:hover {
+    background-color: #434190; /* Darker indigo */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Slightly smaller base font size */
+    }
+
+    .header {
+        font-size: 2rem; /* Smaller size on medium screens */
+    }
+
+    .form-group label {
+        font-size: 1rem; /* Smaller size for labels */
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 0.9rem; /* Smaller font for inputs */
+    }
+
+    .submit-button {
+        padding: 0.65rem; /* Adjust button padding */
+        font-size: 1rem; /* Smaller button font */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px; /* Further reduce base font size for mobile */
+    }
+
+    .header {
+        font-size: 1.5rem; /* Even smaller for small screens */
+    }
+
+    .form-group label {
+        font-size: 0.8rem; /* Smaller size for labels */
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 0.8rem; /* Smaller font for inputs */
+    }
+
+    .submit-button {
+        padding: 0.5rem; /* Further adjust button padding */
+        font-size: 0.9rem; /* Smaller button font */
+    }
+
+    .footer-content {
+        font-size: 0.8rem; /* Smaller font size for footer */
+    }
+
+    .footer a {
+        margin: 0 0.5rem; /* Reduce margin for footer links */
+        font-size: 0.8rem; /* Consistent font size for links */
+    }
+
+    .footer {
+        padding: 0.5rem 0; /* Reduce padding for footer */
+    }
+
+    .result {
+        margin-top: 0.5rem; /* Reduce margin for result */
+        font-size: 0.9rem; /* Adjust result font size */
+    }
+
+    .result-success,
+    .result-error {
+        padding: 0.5rem; /* Reduce padding for result */
+        font-size: 0.9rem; /* Adjust font size for messages */
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 0.4rem; /* Further reduce input padding */
+        font-size: 0.8rem; /* Smaller font for inputs */
+    }
+
+    .form-group label {
+        margin-bottom: 0.3rem; /* Reduce margin for labels */
+    }
+
+    .container {
+        width: 97%; /* Adjust container width */
+    } 
+
+    .word-count, .remaining-requests {
+        font-size: 0.7rem; /* Smaller size for visibility */
+    }
+
+    .back-link, .logout-link, .Dashboard {
+        font-size: 0.7rem; /* Smaller font size for mobile */
+        padding: 0.4rem 0.8rem; /* Adjust padding for mobile */
+        margin: 0.2rem; /* Reduce margin for mobile */
+    }
+}

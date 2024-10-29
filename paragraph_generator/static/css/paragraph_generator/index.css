@@ -1,0 +1,266 @@
+/* Base reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    accent-color: var(--primary-color);
+}
+
+/* Color palette */
+:root {
+    --primary-color: #434190;
+    --secondary-color: #9eadc0;
+    --background-color: #F7FAFC;
+    --text-color: #333;
+}
+
+/* Body and global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+img.logo {
+    height: 40px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    
+}
+
+.project-name {
+    font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn, .btn-primary {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    text-align: center;
+    display: inline-block;
+}
+
+.btn {
+    border: rgb(32, 22, 22) 1px solid;
+}
+
+.btn:hover, .btn-primary:hover {
+    background-color: #2D3748;
+}
+
+.btn-primary {
+    background-color: #a5008f;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--primary-color);
+    color: white;
+}
+
+.welcome-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.welcome-section p {
+    margin-bottom: 1rem;
+}
+
+/* Features Section */
+.features-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.feature {
+    width: 90%;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    max-width: 500px;
+}
+
+/* Feedback Section */
+.feedback-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 0.5rem;
+}
+
+.feedback-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.feedback-form {
+    max-width: 400px;
+    margin: 1rem auto;
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: var(--text-color);
+}
+
+.form-group>input:focus{
+    /* outline: none; */
+    outline-color: var(--primary-color);
+}
+
+textarea {
+    resize: vertical;
+    outline-color: var(--primary-color);
+}
+
+.feedback-form input[type="text"],
+.feedback-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.rating-input {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    flex-wrap: wrap; /* Allows stars to wrap within the container */
+}
+
+.btn-submit {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #2D3748;
+}
+
+/* Footer */
+.footer {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-links img {
+    height: 24px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s;
+}
+
+.social-links img:hover {
+    filter: brightness(0.7);
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+    /* Adjust layouts for tablets and up */
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .logo-container {
+        margin-bottom: 0;
+    }
+
+    .features-section {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+    .feature {
+        width: 45%;
+        min-width: 280px;
+    }
+
+    .welcome-section h2 {
+        font-size: 2.5rem;
+    }
+
+    .ratings {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Adjust layouts for desktop screens */
+    .navbar {
+        padding: 1rem 2rem;
+    }
+
+    .feature {
+        width: 30%;
+        margin-bottom: 1rem;
+    }
+
+    .welcome-section {
+        padding: 3rem 2rem;
+    }
+
+    .welcome-section h2 {
+        font-size: 3rem;
+    }
+}
