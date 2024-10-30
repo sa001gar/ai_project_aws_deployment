@@ -10,7 +10,7 @@ from django.contrib.auth import login , logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 
-from .models import GeneratedContent, UserApiUsage
+from .models import GeneratedContent, UserApiUsage, Feedback
 from .forms import SignUpForm
 import openai
 import os
@@ -19,13 +19,27 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Custom login view
 class CustomLoginView(LoginView):
     template_name = 'auth/login.html'
     redirect_authenticated_user = True
+
+# Index view
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        if request.method=='POST':
+            name=request.POST.get('name')
+            feedback=request.POST.get('suggestion')
+            rating=request.POST.get('rating')
+            Feedback.objects.create(name=name,feedback=feedback,rating=rating)
+            messages.success(request, 'Feedback submitted successfully!')
+            return redirect('index')
 
     return render(request, 'paragraph_generator/index.html')
 
+# Signup view
 def signup_view(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
@@ -41,6 +55,8 @@ def signup_view(request):
         form = SignUpForm()
     return render(request, 'auth/signup.html', {'form': form})
 
+
+# Check and reset daily limit
 def check_reset_daily_limit(user):
     """Reset daily usage if it's a new day"""
     usage, created = UserApiUsage.objects.get_or_create(user=user)
@@ -54,6 +70,8 @@ def check_reset_daily_limit(user):
     
     return usage
 
+
+# Generate paragraph view
 @login_required
 @ratelimit(key='user_or_ip', rate='50/d', method='POST', block=True)
 def generate_paragraph(request):
@@ -158,6 +176,8 @@ def generate_paragraph(request):
             'message': f'Unexpected error: {str(e)}'
         }, status=500)
 
+
+# Dashboard view
 @login_required
 def dashboard(request):
     user_content = GeneratedContent.objects.filter(user=request.user)
@@ -171,6 +191,7 @@ def dashboard(request):
     return render(request, 'paragraph_generator/dashboard.html', context)
 
 
+# Logout view
 @login_required
 def user_logout(request):
     # Logging out the user

@@ -52,8 +52,9 @@
             <p>Our users love it! Help us keep improving by sharing your feedback.</p>
         </div>
     
-        {% comment %} <form class="feedback-form" id="feedbackForm" onsubmit="return validateForm()"> {% endcomment %}
-        <form class="feedback-form" id="feedbackForm" onsubmit="return error_alert()">
+        <form method="POST" class="feedback-form" id="feedbackForm" onsubmit="return validateForm()">
+            {% csrf_token %}
+        {% comment %} <form class="feedback-form" id="feedbackForm" onsubmit="return error_alert()"> {% endcomment %}
             <div class="form-group">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
