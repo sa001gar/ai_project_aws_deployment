@@ -74,7 +74,7 @@ The deployment setup includes:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/sa001gar/ai-paragraph-generator.git
+   git clone https://github.com/sa001gar/ai_project_aws_deployment
    cd ai-paragraph-generator
 2. **Install dependencies:**
     ```python
