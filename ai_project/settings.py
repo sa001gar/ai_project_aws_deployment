@@ -48,9 +48,9 @@ LOGGING = {
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['sagarkundu.live', 'www.sagarkundu.live', '127.0.0.1', 'localhost','13.200.157.135']
+ALLOWED_HOSTS = ['sagarkundu.live', 'www.sagarkundu.live', '127.0.0.1', 'localhost','13.200.157.135','aiparagraphgenerator.sagarkundu.live','www.aiparagraphgenerator.sagarkundu.live']
 
-CSRF_TRUSTED_ORIGINS = ['https://sagarkundu.live', 'https://www.sagarkundu.live']
+CSRF_TRUSTED_ORIGINS = ['https://sagarkundu.live', 'https://www.sagarkundu.live','http://aiparagraphgenerator.sagarkundu.live','https://www.aiparagraphgenerator.sagarkundu.live']
 
 
 # Application definition
@@ -157,7 +157,8 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
