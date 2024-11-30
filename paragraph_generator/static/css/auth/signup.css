@@ -1,186 +1,212 @@
-/* Reset styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Base styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7fafc; /* Very light gray background */
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    padding: 1rem; /* Ensure padding on mobile */
-}
-
-/* Container styles */
-.container {
-    width: 100%;
-    max-width: 450px; /* Fixed max width for the card */
-}
-
-/* Card styles */
-.signup-card {
+    margin: 0;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center; /* Center everything vertically */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
 }
 
-/* Application name styles */
-.app-name {
-    font-size: 2rem; /* Larger font for the application name */
-    font-weight: bold;
-    color: #4c51bf; /* Indigo color */
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* Header styles */
-.header {
-    font-size: 1.5rem; /* Font size for the header */
-    font-weight: bold;
-    color: #4c51bf; /* Indigo color */
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-/* Help message styles */
-.help-message {
-    font-size: 0.9rem;
-    color: #4a5568; /* Darker gray for help text */
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* Password policy styles */
-.password-policy {
-    list-style-type: none; /* Remove bullet points */
-    font-size: 0.9rem; /* Smaller font size */
-    color: #4a5568; /* Darker gray for policy text */
-    margin-top: 0.5rem; /* Space above the list */
-}
-
-/* Form styles */
-.form {
+.form-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Space between form elements */
+    align-items: center;
+    max-width: 400px; /* 25rem */
+    width: 100%;
+    padding: 32px; /* 2rem */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    margin: 16px; /* 1rem */
 }
 
-.form-group {
+.hero-section {
     display: flex;
     flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #4a5568; /* Darker gray for labels */
-}
-
-.form-group input {
-    padding: 0.75rem; /* Increased padding for input fields */
-    border: 1px solid #cbd5e0; /* Light gray */
-    border-radius: 5px;
-    font-size: 1rem; /* Base font size */
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #4c51bf; /* Indigo color */
-}
-
-/* Password strength feedback */
-.password-strength {
-    margin-top: 0.5rem;
-    font-size: 0.9rem; /* Size for password strength feedback */
-    color: #e53e3e; /* Default to red for weak passwords */
-}
-
-/* Button styles */
-.submit-button {
-    padding: 0.75rem;
-    background-color: #4c51bf; /* Indigo color */
+    align-items: center;
+    justify-content: center;
     color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem; /* Base font size */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    gap: 20px; /* 1.25rem */
+    border-radius: 20px; /* 1.25rem */
+    background-color: #007bff;
+    width: 100%;
+    max-width: 50%; /* 31.25rem */
+    height: 100%; /* Allow for natural height on smaller screens */
+    padding: 32px; /* 2rem */
+    box-sizing: border-box;
+    text-align: center; /* Center text */
 }
 
-.submit-button:hover {
-    background-color: #434190; /* Darker indigo */
+.hero-section .sub-heading {
+    margin-top: 0;
+    color: white;
+    font-size: 16px; /* 1rem */
 }
 
-/* Sign up prompt styles */
-.login-prompt {
+.hero-section img {
+    width: 100%;
+    max-width: 400px; /* 25rem */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px; /* 0.625rem */
+}
+
+h2 {
+    margin: 0;
+    font-size: 36px; /* 2.25rem */
+}
+
+.logo {
+    font-size: 40px; /* 2.5rem */
+}
+
+.sub-heading {
+    font-size: 14px; /* 0.875rem */
+    margin-top: 1px; /* 0.0625rem */
+    color: rgb(161, 161, 101);
     text-align: center;
-    margin-top: 1rem;
 }
 
-.login-link {
-    color: #4c51bf; /* Indigo color */
-    font-weight: bold;
+.btns {
+    display: flex;
+    gap: 10px; /* 0.625rem */
+    margin-top: 20px; /* 1.25rem */
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 }
 
-.login-link:hover {
-    text-decoration: underline;
+.btn-primary {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px; /* 0.625rem 1.25rem */
+    border: none;
+    border-radius: 5px; /* 0.3125rem */
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px; /* 0.625rem */
 }
 
-/* Error message styles */
-.error-message {
-    color: #e53e3e; /* Red color */
-    font-size: 0.9rem; /* Slightly smaller font for errors */
+.btn-primary:hover {
+    background: #0056b3;
 }
 
-/* Error input styles */
-.error {
-    border: 2px solid #e53e3e; /* Red color for error */
-    outline: none; /* Remove default outline */
+.btn-secondary {
+    background: white;
+    border: 1px solid rgb(236, 233, 233); /* 1px */
+    color: rgb(104, 102, 102);
+    padding: 10px 20px; /* 0.625rem 1.25rem */
+    border-radius: 5px; /* 0.3125rem */
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px; /* 0.625rem */
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .signup-card {
-        padding: 1.5rem;
+.btn-secondary:hover {
+    background: rgb(236, 233, 233);
+}
+
+form {
+    margin-top: 20px; /* 1.25rem */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 0.625rem */
+    width: 100%;
+}
+
+.form-control {
+    padding: 10px; /* 0.625rem */
+    border: 1px solid rgb(236, 233, 233); /* 1px */
+    border-radius: 5px; /* 0.3125rem */
+    width: 100%;
+    max-width: 360px; /* 22.5rem */
+}
+
+.input-group {
+    display: flex;
+    gap: 10px; /* 0.625rem */
+    width: 100%;
+}
+
+label {
+    font-size: 14px; /* 0.875rem */
+    color: rgb(161, 161, 161);
+}
+
+.mt {
+    margin-top: 20px; /* 1.25rem */
+}
+
+.footer-group {
+    margin-top: 20px; /* 1.25rem */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 0.625rem */
+    font-size: 14px; /* 0.875rem */
+}
+
+.footer-group a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+@media (max-width: 953px) { /* 59.375rem */
+    .hero-section {
+        display: none;
     }
 
-    .app-name {
-        font-size: 2rem; /* Larger font for mobile */
+    .form-section {
+        max-width: 100%;
+        padding: 16px; /* 1rem */
     }
 
-    .header {
-        font-size: 1.6rem; /* Larger header for mobile */
+    .btns {
+        flex-direction: column;
+        width: 100%;
     }
 
-    .help-message,
-    .password-policy {
-        font-size: 1rem; /* Larger help and policy text for mobile */
+    .footer-group {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) { /* 37.5rem */
+    h2 {
+        font-size: 28px; /* 1.75rem */
     }
 
-    .form-group label {
-        font-size: 1.1rem;
+    .logo {
+        font-size: 32px; /* 2rem */
     }
 
-    .form-group input {
-        font-size: 1.1rem;
+    .sub-heading {
+        font-size: 12px; /* 0.75rem */
     }
 
-    .submit-button {
-        font-size: 1.1rem;
+    .btn-primary, .btn-secondary {
+        width: 100%; /* Full width buttons */
+        padding: 12px 16px; /* 0.75rem 1rem */
     }
 
-    .error-message {
-        font-size: 1rem;
+    .form-control {
+        width: 100%; /* Full width form inputs */
     }
 
-    .password-strength {
-        font-size: 1rem; /* Larger feedback text for mobile */
+    .footer-group {
+        font-size: 12px; /* 0.75rem */
+    }
+}
+
+@media (max-width: 400px) { /* 25rem */
+    h2 {
+        font-size: 24px; /* 1.5rem */
+    }
+
+    .logo {
+        font-size: 28px; /* 1.75rem */
+    }
+
+    .sub-heading {
+        font-size: 12px; /* 0.75rem */
     }
 }

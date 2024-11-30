@@ -41,18 +41,25 @@ def index(request):
 
 # Signup view
 def signup_view(request):
+    # Redirect authenticated users to the dashboard
     if request.user.is_authenticated:
         return redirect('dashboard')
-        
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            # Save the user and log them in
             user = form.save()
             login(request, user)
-            messages.success(request, 'Account created successfully!')
+            messages.success(request, 'Account created successfully! Welcome, {}.'.format(user.username))
             return redirect('dashboard')
+        else:
+            # Add an error message if the form is invalid
+            messages.error(request, 'There was an error creating your account. Please check the form and try again.')
     else:
         form = SignUpForm()
+
+    # Render the signup form
     return render(request, 'auth/signup.html', {'form': form})
 
 

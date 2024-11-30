@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('ggfhfhchv/', admin.site.urls),
     # Include the paragraph_generator URLs
     path('', include('paragraph_generator.urls')),  # This will handle all routes from the root URL
 ]

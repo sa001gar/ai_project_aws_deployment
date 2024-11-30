@@ -6,75 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="{% static 'css/auth/signup.css' %}"> <!-- Link to your custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="signup-card">
-            <h1 class="app-name">AI Paragraph Generator</h1>
-            <h2 class="header">Create Account</h2>
-            <p class="help-message">Please fill out the form below to create your account.</p>
     
-            <form method="post" class="form" onsubmit="return validateForm();">
-                {% csrf_token %}
     
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" required>
-                    {% if form.username.errors %}
-                    <p class="error-message">{{ form.username.errors.0 }}</p>
-                    {% endif %}
-                </div>
-    
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" required>
-                    {% if form.email.errors %}
-                    <p class="error-message">{{ form.email.errors.0 }}</p>
-                    {% endif %}
-                </div>
-    
-                <div class="form-group">
-                    <label for="password1">Password</label>
-                    <input type="password" name="password1" required>
-                    {% if form.password1.errors %}
-                    <p class="error-message">{{ form.password1.errors.0 }}</p>
-                    {% endif %}
-                    <div class="password-strength"></div> <!-- For displaying password strength messages -->
-                    <ul class="password-policy">
-                        <li>Must contain characters</li>
-                        <li>Must contain numbers</li>
-                        <li>Must contain symbols</li>
-                    </ul>
-                </div>
-    
-                <div class="form-group">
-                    <label for="password2">Confirm Password</label>
-                    <input type="password" name="password2" required>
-                    {% if form.password2.errors %}
-                    <p class="error-message">{{ form.password2.errors.0 }}</p>
-                    {% endif %}
-                </div>
-    
-                {% if form.non_field_errors %}
+    <div class="form-section">
+        <span class="logo"><i class="bi bi-book"></i></span>
+
+        <h2>Join Us Now</h2>
+        <span class="sub-heading">Join us for a ambitious journey.</span>
+
+        <div class="btns">
+            <button class="btn-secondary">
+                <i class="bi bi-google"></i> Sign up with Google
+            </button>
+        </div>
+
+        <form method="post" class="form" onsubmit="return validateForm();">
+            {% csrf_token %}
+            <label for="name">Username</label>
+            <input class="form-control" type="text" id="username" name="username" required />
+
+            <label for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required />
+
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password1" required />
+            <label for="password">Confirm Password</label>
+            <input class="form-control" type="password" id="password" name="password2" required />
+
+            <div class="input-group">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms">
+                    I agree to the <a href="">terms and conditions</a>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary mt">Sign Up</button>
+        </form>
+
+        <div class="footer-group">
+            <span>Already Registered? <a href="">Sign In</a></span>
+            <a href="">Forgot password?</a>
+        </div>
+        {% if form.non_field_errors %}
                 <div class="error-message">
                     {% for error in form.non_field_errors %}
                         <p>{{ error }}</p>
                     {% endfor %}
                 </div>
                 {% endif %}
-    
-                <div class="error-message"></div> <!-- This will be used to display validation errors -->
-                <button type="submit" class="submit-button">Sign Up</button>
-            </form>
-    
-            <div class="login-prompt">
-                <p>Already have an account? 
-                    <a href="{% url 'login' %}" class="login-link">Login</a>
-                </p>
-            </div>
-        </div>
     </div>
-    
+
+    <div class="hero-section">
+        <h2>Join our AI powered Writing assistant</h2>
+        <span class="sub-heading">Become the best writer in your circle.</span>
+        <img src="{%static 'images/dash.jpg' %}" alt="Learning Dashboard" />
+    </div>
 
 
     <script>
