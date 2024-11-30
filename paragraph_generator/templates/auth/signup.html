@@ -1,45 +1,120 @@
-{% load static  %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="{% static 'css/auth/signup.css' %}"> <!-- Link to your custom CSS -->
+    <meta name="description" content="Sign up for Kitoo, an AI-powered writing assistant to enhance your writing skills with personalized suggestions and tools tailored for students, professionals, and writers at all levels.">
+    <meta name="keywords" content="AI writing assistant, writing skills improvement, writing tools, AI-powered writing, Kitoo, writer help, writing assistant for students, professional writing tools">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Kitoo">
+    <meta property="og:title" content="Sign Up | Kitoo | AI Writing Assistant">
+    <meta property="og:description" content="Sign up for Kitoo today and unlock the full potential of your writing with AI-powered tools.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:url" content="https://sagarkundu.live/signup">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sign Up | Kitoo | AI Writing Assistant">
+    <meta name="twitter:description" content="Join Kitoo to improve your writing with AI-driven tools. Sign up now!">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <meta name="twitter:site" content="@KitooAI">
+
+    <title>Sign Up | Kitoo | AI Writing Assistant</title>
+    <link rel="stylesheet" href="{% static 'css/auth/signup.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    
-    
+    <!-- Hidden SEO Content -->
+    <div style="display:none;">
+        <p>Sign up for Kitoo today and start improving your writing with the latest AI-powered writing tools. Kitoo is a platform designed to help writers of all levels enhance their skills, write more efficiently, and develop their unique style. With advanced features and personalized AI suggestions, Kitoo is the best AI writing assistant you can use. Sign up now and join the Kitoo family!</p>
+        <p>Our platform offers AI-driven tools, smart suggestions, and various resources to help you write better and faster. Whether you're a student, professional, or casual writer, Kitoo will help you improve your writing skills and reach your writing goals. Join us today!</p>
+    </div>
+
     <div class="form-section">
         <span class="logo"><i class="bi bi-book"></i></span>
-
-        <h2>Join Us Now</h2>
-        <span class="sub-heading">Join us for a ambitious journey.</span>
+        <h1>Join Kitoo - Sign Up</h1>
+        <span class="sub-heading">Sign up to scale your writing today!</span>
 
         <div class="btns">
             <button class="btn-secondary">
                 <i class="bi bi-google"></i> Sign up with Google
             </button>
+            <button class="btn-secondary">
+                <i class="bi bi-github"></i> Sign up with Github
+            </button>
         </div>
 
-        <form method="post" class="form" onsubmit="return validateForm();">
+        <!-- Display error messages -->
+        {% if form.errors %}
+        <div class="error-container">
+            {% for field, errors in form.errors.items %}
+                <div class="error-field">
+                    <strong>{{ field|capfirst }}:</strong> {{ errors|join:', ' }}
+                </div>
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div class="error-field">
+                    {% for error in form.non_field_errors %}
+                        <strong>Error:</strong> {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <form method="post" class="form" validate>
             {% csrf_token %}
-            <label for="name">Username</label>
-            <input class="form-control" type="text" id="username" name="username" required />
+            <!-- Username field -->
+            <label for="username">Username</label>
+            <input 
+                class="form-control {% if form.username.errors %}error{% endif %}" 
+                type="text" 
+                id="username" 
+                name="username" 
+                value="{{ form.username.value|default:'' }}" 
+                required 
+            />
 
+            <!-- Email field -->
             <label for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" required />
+            <input 
+                class="form-control {% if form.email.errors %}error{% endif %}" 
+                type="email" 
+                id="email" 
+                name="email" 
+                value="{{ form.email.value|default:'' }}" 
+                required 
+            />
 
-            <label for="password">Password</label>
-            <input class="form-control" type="password" id="password" name="password1" required />
-            <label for="password">Confirm Password</label>
-            <input class="form-control" type="password" id="password" name="password2" required />
+            <!-- Password fields -->
+            <label for="password1">Password</label>
+            <input 
+                class="form-control {% if form.password1.errors %}error{% endif %}" 
+                type="password" 
+                id="password1" 
+                name="password1" 
+                required 
+            />
 
+            <label for="password2">Confirm Password</label>
+            <input 
+                class="form-control {% if form.password2.errors %}error{% endif %}" 
+                type="password" 
+                id="password2" 
+                name="password2" 
+                required 
+            />
+
+            <!-- Terms checkbox -->
             <div class="input-group">
-                <input type="checkbox" id="terms" name="terms" required />
+                <input 
+                    type="checkbox" 
+                    id="terms" 
+                    name="terms" 
+                    {% if form.terms.value %}checked{% endif %} 
+                    required 
+                />
                 <label for="terms">
-                    I agree to the <a href="">terms and conditions</a>
+                    I agree to the <a href="#">terms and conditions</a>.
                 </label>
             </div>
 
@@ -47,103 +122,47 @@
         </form>
 
         <div class="footer-group">
-            <span>Already Registered? <a href="">Sign In</a></span>
-            <a href="">Forgot password?</a>
+            <span>Already Registered? <a href="{% url 'login' %}">Sign In</a></span>
+            <a href="#">Forgot password?</a>
         </div>
-        {% if form.non_field_errors %}
-                <div class="error-message">
-                    {% for error in form.non_field_errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
+
+        <!-- Message container -->
+        {% if messages %}
+        <div id="popup-container">
+            {% for message in messages %}
+            <div class="popup-message {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 
     <div class="hero-section">
-        <h2>Join our AI powered Writing assistant</h2>
-        <span class="sub-heading">Become the best writer in your circle.</span>
-        <img src="{%static 'images/dash.jpg' %}" alt="Learning Dashboard" />
+        <h2>Unlock Your Writing Potential with Kitoo<br>Join the Future of AI-Powered Writing</h2>
+<span class="sub-heading">Become a confident, skilled writer with personalized AI assistance.</span>
+
+        <img src="{% static 'images/dash.jpg' %}" alt="AI Writing Dashboard - Enhance your writing with Kitoo" />
     </div>
 
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const password1Input = document.querySelector('input[name="password1"]');
-            const password2Input = document.querySelector('input[name="password2"]');
-            const errorMessageContainer = document.querySelector('.error-message');
-        
-            // Function to check password strength
-            function checkPasswordStrength(password) {
-                const strengthMessage = document.querySelector('.password-strength');
-                const strongPolicy = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/; // Example policy
-        
-                if (password.length < 8) {
-                    strengthMessage.innerHTML = '<p>Password is too short. Minimum 8 characters required.</p>';
-                    return false;
-                } else if (!strongPolicy.test(password)) {
-                    strengthMessage.innerHTML = '<p>Password must contain letters, numbers, and special characters.</p>';
-                    return false;
-                } else {
-                    strengthMessage.innerHTML = '<p>Password is strong!</p>';
-                    return true;
-                }
-            }
-        
-            // Add event listener to track password strength
-            password1Input.addEventListener('input', function() {
-                checkPasswordStrength(password1Input.value);
-            });
-        
-            // Validate form function
-            function validateForm() {
-                // Clear previous error messages
-                errorMessageContainer.innerHTML = ''; 
-        
-                // Retrieve input values
-                const usernameInput = document.querySelector('input[name="username"]');
-                const password1 = password1Input.value;
-                const password2 = password2Input.value;
-        
-                // Clear any existing error styles
-                usernameInput.classList.remove('error');
-                password1Input.classList.remove('error');
-                password2Input.classList.remove('error');
-        
-                // Username validation (dummy check, should be replaced with AJAX call)
-                const existingUsernames = ["testuser", "john_doe"]; // Sample existing usernames
-                const username = usernameInput.value.trim();
-                if (existingUsernames.includes(username)) {
-                    usernameInput.classList.add('error');
-                    errorMessageContainer.innerHTML += '<p>This username is already taken. Please choose another.</p>';
-                    return false; // Prevent form submission
-                }
-        
-                // Password strength validation
-                if (!checkPasswordStrength(password1)) {
-                    password1Input.classList.add('error');
-                    return false; // Prevent form submission
-                }
-        
-                // Confirm password validation
-                if (password1 !== password2) {
-                    password2Input.classList.add('error');
-                    errorMessageContainer.innerHTML += '<p>Passwords do not match. Please try again.</p>';
-                    return false; // Prevent form submission
-                }
-        
-                // If all validations pass, allow form submission
-                return true; 
-            }
-        
-            // Attach form submission event listener
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(event) {
-                if (!validateForm()) {
-                    event.preventDefault(); // Prevent submission if validation fails
-                }
+        // Function to show and hide messages
+        document.addEventListener("DOMContentLoaded", function () {
+            const messages = document.querySelectorAll(".popup-message");
+            messages.forEach((message) => {
+                message.setAttribute("aria-live", "assertive");  // For screen readers
+                // Show the message
+                message.style.display = "block";
+
+                // Hide after 5 seconds
+                setTimeout(() => {
+                    message.style.opacity = "0";
+                    setTimeout(() => {
+                        message.style.display = "none";
+                    }, 500); // Match fade-out duration
+                }, 5000); // Adjust duration as needed
             });
         });
-        
     </script>
 </body>
 </html>

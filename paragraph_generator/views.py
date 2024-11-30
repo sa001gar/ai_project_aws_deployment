@@ -40,8 +40,8 @@ def index(request):
     return render(request, 'paragraph_generator/index.html')
 
 # Signup view
+
 def signup_view(request):
-    # Redirect authenticated users to the dashboard
     if request.user.is_authenticated:
         return redirect('dashboard')
 
@@ -51,16 +51,15 @@ def signup_view(request):
             # Save the user and log them in
             user = form.save()
             login(request, user)
-            messages.success(request, 'Account created successfully! Welcome, {}.'.format(user.username))
+            messages.success(request, f"Account created successfully! Welcome, {user.username}.")
             return redirect('dashboard')
         else:
-            # Add an error message if the form is invalid
-            messages.error(request, 'There was an error creating your account. Please check the form and try again.')
+            messages.error(request, 'There was an error creating your account. Please try again.')
     else:
         form = SignUpForm()
 
-    # Render the signup form
     return render(request, 'auth/signup.html', {'form': form})
+
 
 
 # Check and reset daily limit

@@ -4,13 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'css/auth/login.css' %}"> <!-- Link to your custom CSS -->
+    <title>Login | Kitoo | AI Writing Assistant</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Log in to Kitoo and access AI-powered writing tools that improve your writing skills. Sign in now to manage your content and enhance your productivity.">
+    <meta name="keywords" content="login, Kitoo, AI writing assistant, writing tools, improve writing, sign in">
+    <meta name="author" content="Kitoo AI Team">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Login | Kitoo | AI Writing Assistant">
+    <meta property="og:description" content="Log in to Kitoo and access AI-powered writing tools that improve your writing skills. Sign in now to manage your content and enhance your productivity.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:url" content="https://sagarkundu.live/login">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Login | Kitoo | AI Writing Assistant">
+    <meta name="twitter:description" content="Log in to Kitoo and access AI-powered writing tools that improve your writing skills. Sign in now to manage your content and enhance your productivity.">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <meta name="twitter:site" content="@KitooAI">
+
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/auth/login.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="login-card">
-            <h1 class="app-name">AI Paragraph Generator</h1>
+            <h1 class="app-name">Kitoo | AI Writing Assistant</h1>
             <p class="helper-message">Please log in to access your account and manage your content effortlessly.</p>
 
             {% if messages %}
@@ -53,6 +74,9 @@
         </div>
     </div>
 
-    
+    <!-- Optional: Add JavaScript to validate form input or handle messages -->
+    <script>
+        // Form validation and message handling script can be added here.
+    </script>
 </body>
 </html>

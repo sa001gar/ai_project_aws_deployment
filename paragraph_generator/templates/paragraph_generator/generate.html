@@ -4,9 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paragraph Generator</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="description" content="Generate AI-powered paragraphs for your writing needs. Customize the topic, grade level, tone, and style to enhance your content.">
+    <meta name="keywords" content="AI paragraph generator, writing assistance, generate paragraphs, AI writing tool, content creation, educational tools">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Kitoo">
+    <meta property="og:title" content="AI Paragraph Generator - Kitoo">
+    <meta property="og:description" content="Use Kitoo’s AI-powered paragraph generator to create customized paragraphs for different topics and grade levels.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:url" content="https://sagarkundu.live/paragraph-generator">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Paragraph Generator - Kitoo">
+    <meta name="twitter:description" content="Generate AI-powered paragraphs with ease. Customize your content for any grade level, tone, and style.">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <meta name="twitter:site" content="@KitooAI">
+    <title>AI Paragraph Generator | Kitoo</title>
     <link rel="stylesheet" href="{% static 'css/paragraph_generator/generate.css' %}"><!-- Link to the custom CSS -->
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "AI Paragraph Generator",
+        "description": "An AI-powered tool to generate customized paragraphs for different topics and educational levels.",
+        "url": "https://sagarkundu.live/paragraph-generator",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Kitoo",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{% static 'images/logo.png' %}"
+            }
+        },
+        "mainEntityOfPage": "https://sagarkundu.live/paragraph-generator",
+        "creator": {
+            "@type": "Person",
+            "name": "Sagar Kundu",
+            "url": "https://sagarkundu.live"
+        },
+        "keywords": "AI paragraph generator, writing assistance, educational tools, content creation",
+        "genre": "Educational, Writing Tool",
+        "audience": {
+            "@type": "Audience",
+            "audienceType": "Students, Writers, Educators"
+        },
+        "softwareApplication": {
+            "@type": "SoftwareApplication",
+            "applicationCategory": "Writing, Productivity",
+            "operatingSystem": "All",
+            "screenshot": "{% static 'images/screenshot.png' %}",
+            "datePublished": "2024-12-01"
+        }
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -18,7 +68,6 @@
             <a href="{% url 'index' %}" class="back-link">Back to Home</a>
             <a href="{% url 'dashboard' %}" class="Dashboard">Dashboard</a>
             <a href="/logout" class="logout-link">Logout</a>
-            
             
             <form id="generateForm">
                 <div class="form-group">

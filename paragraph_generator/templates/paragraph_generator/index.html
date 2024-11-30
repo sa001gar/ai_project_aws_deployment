@@ -4,102 +4,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Paragraph Generator - Welcome</title>
-    <link rel="icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/paragraph_generator/index.css' %}"> <!-- Link to your CSS file -->
-</head>
-<body>
+    <title>Kitto AI Writing Assistant - Welcome</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs.">
+    <meta name="keywords" content="AI, paragraph generator, writing assistant, student tool, creative writing, plagiarism free, essay help">
+    <meta name="author" content="Kitto AI Writing Assistant">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kitto AI Writing Assistant - Welcome">
+    <meta property="og:description" content="Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:url" content="sagarkundu.live"> <!-- Update with your live URL -->
+    <meta property="og:site_name" content="Kitto AI Writing Assistant">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kitto AI Writing Assistant - Welcome">
+    <meta name="twitter:description" content="Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs.">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <meta name="twitter:creator" content="@YourTwitterHandle">
 
-    <!-- Navigation bar -->
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="{%static 'images/logo.png'%}" alt="AI Paragraph Generator Logo" class="logo">
-            <h1 class="project-name">AI Paragraph Generator</h1>
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/paragraph_generator/index.css' %}">
+    {% comment %} <link href="{% static 'css/paragraph_generator/index-tailwind.css' %}" rel="stylesheet"> {% endcomment %}
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+    
+    <!-- Structured Data (JSON-LD) for Search Engines -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Kitto AI Writing Assistant",
+            "url": "sagarkundu.live", 
+            "description": "Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs."
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navbar -->
+    <header class="bg-purple-800 text-white p-4">
+        <div class="flex items-center justify-between max-w-screen-xl mx-auto">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'images/logo.png' %}" alt="AI Paragraph Generator Logo" class="h-10 rounded-full ">
+                <h1 class="text-3xl font-bold py-2">Kitto AI</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="" class="text-white hover:text-gray-200 py-2">Home</a>
+                <a href="" class="text-white hover:text-gray-200 py-2">About</a>
+                <a href="" class="text-white hover:text-gray-200 py-2">Features</a>
+                <a href="" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Login</a>
+            </nav>
+    
+            <!-- Mobile menu toggle -->
+            <div class="md:hidden">
+                <button id="mobile-menu-toggle" class="text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="nav-buttons">
-            <a href="{% url 'login' %}" class="btn">Login</a>
-            <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+    
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-purple-700 text-white p-4 mt-4 space-y-4">
+            <a href="" class="block">Home</a>
+            <a href="" class="block">About</a>
+            <a href="" class="block">Features</a>
+            <a href="{% url 'login' %}" class="block bg-pink-600 hover:bg-pink-700 py-2 px-6 rounded-full font-semibold">Login</a>
         </div>
     </header>
-
-    <!-- Main welcome section -->
-    <section class="welcome-section">
-        <h2>Welcome to AI Paragraph Generator</h2>
-        <p>Helping students craft unique, quality paragraphs that boost their writing skills.</p>
-        <p>Explore how our AI-powered tool enhances creativity and efficiency in writing assignments.</p>
-        <a href="{% url 'login' %}" class="btn-primary">Get Started</a>
+    
+    <!-- Main Welcome Section -->
+    <section class="text-center py-12 bg-purple-800 text-white">
+        <h2 class="text-4xl font-extrabold mb-8">Welcome to Kitto AI Writing Assistant</h2>
+        <p class="text-lg mb-12">Helping students craft unique, quality paragraphs that boost their writing skills.</p>
+        <a href="{% url 'login' %}" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Get Started</a>
     </section>
 
-    <!-- Features & Value Section -->
-    <section class="features-section">
-        <div class="feature">
-            <h3>Purpose</h3>
-            <p>Designed for students to get paragraph inspiration, save time, and improve writing.</p>
+    <!-- Features Section -->
+    <section class="py-12 bg-gray-100">
+        <h3 class="text-3xl font-bold text-purple-800 text-center mb-6">Features of Kitto AI Writing Assistant</h3>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">AI-Powered Suggestions</h4>
+                <p>Generate unique, plagiarism-free paragraphs based on user input with the help of AI.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">Instant Results</h4>
+                <p>Get immediate results that help students save time and enhance writing quality.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">Multiple Writing Styles</h4>
+                <p>Choose from different writing styles and tones for varied use cases, from essays to creative writing.</p>
+            </div>
         </div>
-        <div class="feature">
-            <h3>Value</h3>
-            <p>Generate unique, plagiarism-free paragraphs that encourage better learning and practice.</p>
+    </section>
+
+    <!-- Rating and Features Ranking Section -->
+    <<!-- Rating and Features Ranking Section -->
+    <section class="py-12 bg-purple-50">
+        <h3 class="text-3xl font-bold text-purple-800 text-center mb-4">Rate Our Tool</h3>
+        <p class="text-lg text-center mb-6">Tell us how much you love Kitto AI Writing Assistant and how we can improve!</p>
+        
+        <!-- Rating and Ranking Section -->
+        <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Rating Component -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <label for="rating" class="block text-xl font-semibold text-purple-800 mb-2">Overall Rating:</label>
+                <div class="flex space-x-1 text-yellow-400">
+                    <input type="radio" name="rating" value="1" id="rating-1" class="rating-star">
+                    <input type="radio" name="rating" value="2" id="rating-2" class="rating-star">
+                    <input type="radio" name="rating" value="3" id="rating-3" class="rating-star">
+                    <input type="radio" name="rating" value="4" id="rating-4" class="rating-star">
+                    <input type="radio" name="rating" value="5" id="rating-5" class="rating-star">
+                </div>
+            </div>
+
+            <!-- Features Ranking -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">Ease of Use</h4>
+                <input type="range" name="ease_of_use" min="1" max="5" value="3" class="w-full">
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">Speed</h4>
+                <input type="range" name="speed" min="1" max="5" value="4" class="w-full">
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl font-semibold text-purple-800 mb-2">Accuracy of Suggestions</h4>
+                <input type="range" name="accuracy" min="1" max="5" value="5" class="w-full">
+            </div>
         </div>
     </section>
 
     <!-- Feedback Section -->
-    <section class="feedback-section">
-        <h3>Your Suggestions</h3>
-        <p>We'd love to hear your thoughts on how we can make AI Paragraph Generator even better!</p>
+    <section class="py-12 bg-gray-100">
+        <h3 class="text-3xl font-bold text-purple-800 text-center mb-6">Your Suggestions</h3>
+        <p class="text-lg text-center mb-6">We value your feedback! Help us make AI Paragraph Generator even better.</p>
         
-        <div class="ratings">
-            <span class="rating">⭐️⭐️⭐️⭐️⭐️</span>
-            <p>Our users love it! Help us keep improving by sharing your feedback.</p>
-        </div>
-    
-        <form method="POST" class="feedback-form" id="feedbackForm" onsubmit="return validateForm()">
+        <form method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg" id="feedbackForm" onsubmit="return validateForm()">
             {% csrf_token %}
-        {% comment %} <form class="feedback-form" id="feedbackForm" onsubmit="return error_alert()"> {% endcomment %}
-            <div class="form-group">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
+            <div class="mb-4">
+                <label for="name" class="block font-semibold mb-2">Your Name:</label>
+                <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-md" required>
             </div>
-    
-            <div class="form-group">
-                <label for="suggestion">Your Suggestion:</label>
-                <textarea id="suggestion" name="suggestion" rows="4" required></textarea>
+
+            <div class="mb-4">
+                <label for="suggestion" class="block font-semibold mb-2">Your Suggestion:</label>
+                <textarea id="suggestion" name="suggestion" rows="4" class="w-full p-3 border border-gray-300 rounded-md" required></textarea>
             </div>
-    
-            <div class="form-group">
-                <label for="rating">Your Rating:</label>
-                <div class="rating-input">
-                    <input type="radio" name="rating" value="1" required> ⭐
-                    <input type="radio" name="rating" value="2"> ⭐⭐
-                    <input type="radio" name="rating" value="3"> ⭐⭐⭐
-                    <input type="radio" name="rating" value="4"> ⭐⭐⭐⭐
-                    <input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐
-                </div>
-            </div>
-    
-            <button type="submit" class="btn-submit">Submit Feedback</button>
+
+            <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Submit</button>
         </form>
     </section>
 
-    <!-- Footer with SVG graphics -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 AI Paragraph Generator. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/sagarkundu._/" target="_blank" >
-                    <img src="{%static 'images/instagram.svg'%}" alt="Instagram">
-                </a>
-                <a href="https://github.com/sa001gar" target="_blank">
-                    <img src="{%static 'images/github.svg'%}" alt="Github">
-                </a>
-                <a href="https://www.linkedin.com/in/sagarkundu/" target="_blank">
-                    <img src="{%static 'images/linkedin.svg'%}" alt="LinkedIn">
-                </a>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="bg-purple-800 text-white text-center py-6">
+        <p>&copy; 2024 AI Paragraph Generator. All rights reserved.</p>
     </footer>
 
-
     <script>
+        // Toggle mobile menu
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
         function validateForm() {
     const name = document.getElementById("name").value.trim();
     const suggestion = document.getElementById("suggestion").value.trim();
