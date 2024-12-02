@@ -6,7 +6,7 @@ from django.urls import reverse
 class StaticViewSitemap(Sitemap):
     def items(self):
         # List of views to include in the sitemap
-        return ['index', 'dashboard', 'generate_paragraph']
+        return ['index', 'dashboard', 'generate_paragraph','signup']
 
     def location(self, item):
         return reverse(item)

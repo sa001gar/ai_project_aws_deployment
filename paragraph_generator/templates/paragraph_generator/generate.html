@@ -5,69 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Generate AI-powered paragraphs for your writing needs. Customize the topic, grade level, tone, and style to enhance your content.">
-    <meta name="keywords" content="AI paragraph generator, writing assistance, generate paragraphs, AI writing tool, content creation, educational tools">
+    <meta name="keywords" content="AI Writing Assistant, writing assistance, generate paragraphs, AI writing tool, content creation, educational tools">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Kitoo">
-    <meta property="og:title" content="AI Paragraph Generator - Kitoo">
-    <meta property="og:description" content="Use Kitoo’s AI-powered paragraph generator to create customized paragraphs for different topics and grade levels.">
+    <meta property="og:title" content="AI Writing Assistant - Kitoo">
+    <meta property="og:description" content="Use Kitoo’s AI-powered Writing Assistant to create customized paragraphs for different topics and grade levels.">
     <meta property="og:image" content="{% static 'images/logo.png' %}">
-    <meta property="og:url" content="https://sagarkundu.live/paragraph-generator">
+    <meta property="og:url" content="https://sagarkundu.live">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Paragraph Generator - Kitoo">
+    <meta name="twitter:title" content="AI Writing Assistant - Kitoo">
     <meta name="twitter:description" content="Generate AI-powered paragraphs with ease. Customize your content for any grade level, tone, and style.">
     <meta name="twitter:image" content="{% static 'images/logo.png' %}">
     <meta name="twitter:site" content="@KitooAI">
-    <title>AI Paragraph Generator | Kitoo</title>
+    <title>Kitto | Generate Beautiful Writings with AI</title>
     <link rel="stylesheet" href="{% static 'css/paragraph_generator/generate.css' %}"><!-- Link to the custom CSS -->
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        "name": "AI Paragraph Generator",
-        "description": "An AI-powered tool to generate customized paragraphs for different topics and educational levels.",
-        "url": "https://sagarkundu.live/paragraph-generator",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Kitoo",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "{% static 'images/logo.png' %}"
+        {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            "name": "AI Writing Assistant",
+            "description": "An AI-powered tool to generate customized paragraphs for different topics and educational levels.",
+            "url": "https://sagarkundu.live",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Kitoo",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{% static 'images/logo.png' %}"
+                }
+            },
+            "mainEntityOfPage": "https://sagarkundu.live",
+            "creator": {
+                "@type": "Person",
+                "name": "Sagar Kundu",
+                "url": "https://sagarkundu.live"
+            },
+            "keywords": "AI Writing Assistant, writing assistance, educational tools, content creation",
+            "genre": "Educational, Writing Tool",
+            "audience": {
+                "@type": "Audience",
+                "audienceType": "Students, Writers, Educators"
+            },
+            "softwareApplication": {
+                "@type": "SoftwareApplication",
+                "applicationCategory": "Writing, Productivity",
+                "operatingSystem": "All",
+                "screenshot": "{% static 'images/logo.png' %}",
+                "datePublished": "2024-12-01"
             }
-        },
-        "mainEntityOfPage": "https://sagarkundu.live/paragraph-generator",
-        "creator": {
-            "@type": "Person",
-            "name": "Sagar Kundu",
-            "url": "https://sagarkundu.live"
-        },
-        "keywords": "AI paragraph generator, writing assistance, educational tools, content creation",
-        "genre": "Educational, Writing Tool",
-        "audience": {
-            "@type": "Audience",
-            "audienceType": "Students, Writers, Educators"
-        },
-        "softwareApplication": {
-            "@type": "SoftwareApplication",
-            "applicationCategory": "Writing, Productivity",
-            "operatingSystem": "All",
-            "screenshot": "{% static 'images/screenshot.png' %}",
-            "datePublished": "2024-12-01"
         }
-    }
-    </script>
+        </script>
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <h1 class="header">AI Paragraph Generator</h1>
+            <h1 class="header">AI Writing Assistant</h1>
             <div class="requests-info">
                 <p>Remaining requests today: <span id="remainingRequests" class="highlight">{{ remaining_requests }}</span></p>
             </div>
             <a href="{% url 'index' %}" class="back-link">Back to Home</a>
             <a href="{% url 'dashboard' %}" class="Dashboard">Dashboard</a>
             <a href="/logout" class="logout-link">Logout</a>
+            
             
             <form id="generateForm">
                 <div class="form-group">
@@ -116,16 +117,14 @@
             <div id="result" class="result"></div>
         </div>
     </div>
-
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 Paragraph Generator. All Rights Reserved.</p>
+            <p>&copy; 2024 AI Writing Assistant. All Rights Reserved.</p>
             <a href="#">Terms of Service</a> | 
             <a href="#">Privacy Policy</a> | 
             <a href="#">Help</a>
         </div>
     </footer>
-
     <script>
         $(document).ready(function() {
             $('#generateForm').on('submit', function(e) {
