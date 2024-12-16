@@ -101,27 +101,41 @@ def generate_paragraph_index(request):
         Requirements:
         - Generate in English Language
         - Appropriate for indian students
-        - Write in a Indian Educator and Students writing style
-        - Keep it precise and concise
-        - only give the paragraph on the topic"""
+        - Write in a Indian Educator's and Student's writing style
+        - Write in a formal tone"""
+        system="You are a AI Writing assistant, who helps students to write paragraph instantly and efficiently."
         
-        # Make the API call
-        client = openai.OpenAI(
-  api_key=os.environ.get("TOGETHER_API_KEY"),
-  base_url="https://api.together.xyz/v1",
-)
+#         # Make the API call
+#         client = openai.OpenAI(
+#   api_key=os.environ.get("TOGETHER_API_KEY"),
+#   base_url="https://api.together.xyz/v1",
+# )
 
-        response = client.chat.completions.create(
-  model="meta-llama/Llama-Vision-Free",
-  messages=[
-    {"role": "system", "content": "You are a AI Writing assistant, who helps students to write paragraph instantly and efficiently."},
-    {"role": "user", "content": prompt},
-    # {"role": "user", "content": "Generate a paragraph on the topic of 'The importance of education in life'"},
-  ]
-)
+#         response = client.chat.completions.create(
+#   model="meta-llama/Llama-Vision-Free",
+#   messages=[
+#     {"role": "system", "content": "You are a AI Writing assistant, who helps students to write paragraph instantly and efficiently."},
+#     {"role": "user", "content": prompt},
+#     # {"role": "user", "content": "Generate a paragraph on the topic of 'The importance of education in life'"},
+#   ]
+# )
 
+#         # Parse API response
+#         content = response.choices[0].message.content
+
+
+        from google import genai
+
+        client = genai.Client(
+            api_key=os.environ.get("MAIN_API_KEY"),
+        )
+        response = client.models.generate_content(
+            model='gemini-2.0-flash-exp', contents=f"{prompt}\n{system}"
+        )
+        # print(response.text)
         # Parse API response
-        content = response.choices[0].message.content
+        content = response.text
+
         if not content:
             return JsonResponse({
                 'status': 'error',
