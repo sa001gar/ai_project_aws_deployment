@@ -104,7 +104,7 @@ def generate_paragraph_index(request):
         - Write in a Indian Educator and Students writing style
         - Keep it approximately precise and concise
         - Make it engaging and informative but not too complex
-        - only give the answer to the question asked not other information. Just if I write APJ ABdul Kalam Generate the paragaph only"""
+        - only give the answer to the question asked not other information."""
         
         # Make the API call
         client = openai.OpenAI(
