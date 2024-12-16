@@ -99,6 +99,7 @@ def generate_paragraph_index(request):
         # Construct the prompt
         prompt = f"""Generate an educational paragraph about {topic}.
         Requirements:
+        - Generate in indian english not other languages
         - Appropriate for indian students
         - Use a tone of Indian English and Culture
         - Write in a Indian Educator and Students writing style
