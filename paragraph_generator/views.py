@@ -102,7 +102,7 @@ def generate_paragraph_index(request):
         - Generate in English Language
         - Appropriate for indian students
         - Write in a Indian Educator and Students writing style
-        - Keep it approximately precise and concise
+        - Keep it precise and concise
         - only give the answer to the question asked not other information."""
         
         # Make the API call
