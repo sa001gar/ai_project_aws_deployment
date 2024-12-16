@@ -33,14 +33,14 @@ class UserApiUsage(models.Model):
 class Feedback(models.Model):
     name = models.CharField(max_length=100) # name field is a CharField
     feedback = models.TextField() # feedback field is a TextField
-    RATING_CHOICES = [
-        (1, '1 - Very Poor'),
-        (2, '2 - Poor'),
-        (3, '3 - Average'),
-        (4, '4 - Good'),
-        (5, '5 - Excellent'),
-    ]
-    rating = models.IntegerField(choices=RATING_CHOICES) # rating field is an IntegerField with choices defined in RATING_CHOICES
+    # RATING_CHOICES = [
+    #     (1, '1 - Very Poor'),
+    #     (2, '2 - Poor'),
+    #     (3, '3 - Average'),
+    #     (4, '4 - Good'),
+    #     (5, '5 - Excellent'),
+    # ]
+    # rating = models.IntegerField(choices=RATING_CHOICES) # rating field is an IntegerField with choices defined in RATING_CHOICES
     created_at = models.DateTimeField(auto_now_add=True) # created_at field is a DateTimeField
 
     # Meta Class : The Meta class is used to define the ordering of the Feedback objects based on the created_at field in descending order.

@@ -32,8 +32,8 @@ def index(request):
         if request.method=='POST':
             name=request.POST.get('name')
             feedback=request.POST.get('suggestion')
-            rating=request.POST.get('rating')
-            Feedback.objects.create(name=name,feedback=feedback,rating=rating)
+            # rating=request.POST.get('rating')
+            Feedback.objects.create(name=name,feedback=feedback)
             messages.success(request, 'Feedback submitted successfully!')
             return redirect('index')
 
@@ -86,7 +86,7 @@ def generate_paragraph_index(request):
     try:
 
         # Set the OpenAI API key
-        openai.api_key = os.environ.get("OPENAI_API_KEY")
+        # openai.api_key = os.environ.get("OPENAI_API_KEY")
 
         # Get and validate parameters from request
         topic = request.POST.get('topic', '').strip()
@@ -110,12 +110,6 @@ def generate_paragraph_index(request):
   api_key=os.environ.get("TOGETHER_API_KEY"),
   base_url="https://api.together.xyz/v1",
 )
-        # response = client.chat.completions.create(
-        #     model="gpt-3.5-turbo",
-        #     messages=[
-        #         {"role": "user", "content": prompt}
-        #     ]
-        # )
 
         response = client.chat.completions.create(
   model="meta-llama/Llama-Vision-Free",

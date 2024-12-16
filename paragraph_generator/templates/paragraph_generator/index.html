@@ -378,13 +378,16 @@
             <p class="text-center text-black mb-12">
                 Your suggestions help us improve our tool. Please share your thoughts!
             </p>
-            <form class="max-w-xl mx-auto">
-                <input type="text" 
+            <form method="POST" class="max-w-xl mx-auto">
+                {% csrf_token %}
+                <input type="text"
+                       name="name"  
                        placeholder="Your Name" 
                        class="w-full mb-4 px-4 py-3 rounded-lg bg-white  text-black  border  border-gray-600 focus:outline-none focus:ring-2 focus:ring-black">
                 <textarea placeholder="Write your feedback here..." 
                           class="w-full mb-4 px-4 py-3 rounded-lg bg-white  text-black  border  border-gray-600 focus:outline-none focus:ring-2 focus:ring-black"
-                          rows="4"></textarea>
+                          rows="4"
+                          name="suggestion"></textarea>
                 <button class="w-full bg-black  px-6 py-3 rounded-lg hover:bg-white hover:border-2 hover:border-black hover:text-black transition-colors">
                     Submit Feedback
                 </button>
