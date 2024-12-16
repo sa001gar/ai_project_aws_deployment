@@ -103,7 +103,7 @@ def generate_paragraph_index(request):
         - Appropriate for indian students
         - Write in a Indian Educator and Students writing style
         - Keep it precise and concise
-        - only give the answer to the question asked not other information."""
+        - only give the paragraph on the topic"""
         
         # Make the API call
         client = openai.OpenAI(
