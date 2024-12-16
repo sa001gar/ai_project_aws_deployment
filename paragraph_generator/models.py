@@ -4,14 +4,10 @@ from django.contrib.auth.models import User
 
 # GeneratedContent Model : Here the GeneratedContent model is created with the following fields:
 class GeneratedContent(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) # user field is a ForeignKey to the User model
     prompt = models.TextField() # prompt field is a TextField
     content = models.TextField() # content field is a TextField
     word_count = models.IntegerField() # word_count field is an IntegerField
     topic = models.CharField(max_length=200) # topic field is a CharField
-    grade_level = models.CharField(max_length=50) # grade_level field is a CharField
-    tone = models.CharField(max_length=50) # tone field is a CharField
-    style = models.CharField(max_length=50) # style field is a CharField
     created_at = models.DateTimeField(auto_now_add=True) # created_at field is a DateTimeField
     
     # Meta Class : The Meta class is used to define the ordering of the GeneratedContent objects based on the created_at field in descending order.
@@ -20,7 +16,7 @@ class GeneratedContent(models.Model):
 
     # __str__ Method : The __str__ method is used to return a string representation of the GeneratedContent object.
     def __str__(self):
-        return f"Content by {self.user.username} at {self.created_at}"
+        return f"Created at {self.created_at}"
 
 
 # UserApiUsage Model : Here the UserApiUsage model is created with the following fields:

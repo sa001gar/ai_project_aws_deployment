@@ -77,50 +77,34 @@ def check_reset_daily_limit(user):
     return usage
 
 
-# Generate paragraph view
-@login_required
-@ratelimit(key='user_or_ip', rate='50/d', method='POST', block=True)
-def generate_paragraph(request):
+# Generate paragraph in index view
+def generate_paragraph_index(request):
     if request.method == 'GET':
         # Render the generate.html page with initial context
-        return render(request, 'paragraph_generator/generate.html', {'remaining_requests': 50})
+        return render(request, 'paragraph_generator/generate.html')
 
     try:
-        # Check daily limit
-        usage = check_reset_daily_limit(request.user)
-        if usage.daily_usage >= 50:  # 50 requests per day limit
-            return JsonResponse({
-                'status': 'error',
-                'message': 'Daily limit exceeded. Please try again tomorrow.'
-            }, status=429)
 
         # Set the OpenAI API key
         openai.api_key = os.environ.get("OPENAI_API_KEY")
 
         # Get and validate parameters from request
         topic = request.POST.get('topic', '').strip()
-        grade_level = request.POST.get('grade_level', 'high school').strip()
-        tone = request.POST.get('tone', 'neutral').strip()
-        style = request.POST.get('style', 'informative').strip()
-        
-        try:
-            word_limit = int(request.POST.get('word_limit', 200))+30
-            if word_limit <= 0 or word_limit > 500:
-                raise ValueError("Word limit must be a positive integer and not exceed 500.")
-        except (TypeError, ValueError) as e:
+        if not topic:
             return JsonResponse({
                 'status': 'error',
-                'message': f'Invalid word limit: {str(e)}'
+                'message': 'Topic is required.'
             }, status=400)
-
+        
         # Construct the prompt
         prompt = f"""Generate an educational paragraph about {topic}.
         Requirements:
-        - Appropriate for {grade_level} level students
-        - Use a {tone} tone
-        - Write in a {style} style
-        - Keep it approximately {word_limit} words
-        - Make it engaging and informative"""
+        - Appropriate for indian students
+        - Use a tone of Indian English and Culture
+        - Write in a Indian Educator and Students writing style
+        - Keep it approximately precise and concise
+        - Make it engaging and informative but not too complex
+        - only give the answer to the question asked not other information. Just if I write APJ ABdul Kalam Generate the paragaph only"""
         
         # Make the API call
         client = openai.OpenAI(
@@ -137,7 +121,7 @@ def generate_paragraph(request):
         response = client.chat.completions.create(
   model="meta-llama/Llama-Vision-Free",
   messages=[
-    # {"role": "system", "content": "You are a Teacher."},
+    {"role": "system", "content": "You are a AI Writing assistant, who helps students to write paragraph instantly and efficiently."},
     {"role": "user", "content": prompt},
     # {"role": "user", "content": "Generate a paragraph on the topic of 'The importance of education in life'"},
   ]
@@ -155,25 +139,16 @@ def generate_paragraph(request):
 
         # Save to database (assuming you have a model to store this data)
         GeneratedContent.objects.create(
-            user=request.user,
             prompt=prompt,
             content=content,
             word_count=word_count,
             topic=topic,
-            grade_level=grade_level,
-            tone=tone,
-            style=style
         )
-        
-        # Update usage
-        usage.daily_usage += 1
-        usage.save()
         
         return JsonResponse({
             'status': 'success',
             'content': content,
             'word_count': word_count,
-            'remaining_requests': 50 - usage.daily_usage
         })
         
     except Exception as e:

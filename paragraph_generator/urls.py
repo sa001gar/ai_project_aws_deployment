@@ -15,7 +15,7 @@ urlpatterns = [
     # Application URLs
     path('', views.index, name='index'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('generate/', views.generate_paragraph, name='generate_paragraph'),
+    path('generate/', views.generate_paragraph_index, name='generate_paragraph'),
 
     # Sitemap URL
     path('sitemap.xml', sitemap, {'sitemaps': {'static': StaticViewSitemap}}, name='sitemap'),

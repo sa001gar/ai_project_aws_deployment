@@ -16,19 +16,152 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Kitto AI Writing Assistant - Welcome">
     <meta property="og:description" content="Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs.">
-    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:image" content="{% static 'images/logo.jpeg' %}">
     <meta property="og:url" content="sagarkundu.live"> <!-- Update with your live URL -->
     <meta property="og:site_name" content="Kitto AI Writing Assistant">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kitto AI Writing Assistant - Welcome">
+    <meta name="twitter:title" content="Kitto AI Writing Assistant - Write Better with AI">
     <meta name="twitter:description" content="Kitto AI Writing Assistant helps students improve writing skills by generating unique, quality paragraphs.">
-    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <meta name="twitter:image" content="{% static 'images/logo.jpeg' %}">
     <meta name="twitter:creator" content="@YourTwitterHandle">
 
-    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/paragraph_generator/index.css' %}">
+
+    {% comment %} CSS Links  {% endcomment %}
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <link rel="icon" href="{% static 'images/logo.jpeg' %}" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .hero-section {
+            background-color: #0a0a0a;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hexagon-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .hexagon {
+            position: relative;
+            width: 99.5px;
+            height: 110px;
+            background-color: #1a1a1a;
+            margin: 2px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            transition: all 0.3s ease;
+        }
+
+        .hexagon::before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            right: 1px;
+            bottom: 1px;
+            background-color: #0a0a0a;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            z-index: 1;
+        }
+
+        .hexagon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            z-index: 0;
+        }
+
+        .hexagon:hover::after,
+        .hexagon.active::after {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 100px;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+        }
+
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #2a2d3e 0%, #3f4c6b 100%);
+        }
+
+        .owl-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .owl-dot {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .owl-dot span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: #D1D5DB;
+            border-radius: 50%;
+        }
+
+        .owl-dot.active span {
+            background-color: #3B82F6;
+        }
+
+        .hero-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .hero-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-button {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            color: white;
+            border: none;
+        }
+
+        .hero-button:hover {
+            opacity: 0.9;
+        }
+    </style>
     {% comment %} <link href="{% static 'css/paragraph_generator/index-tailwind.css' %}" rel="stylesheet"> {% endcomment %}
     <script src="{% static 'js/tailwindcss.js' %}"></script>
     
@@ -43,162 +176,450 @@
         }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
-    <!-- Navbar -->
-    <header class="bg-purple-800 text-white p-4">
-        <div class="flex items-center justify-between max-w-screen-xl mx-auto">
-            <div class="flex items-center space-x-4">
-                <img src="{% static 'images/logo.png' %}" alt="AI Paragraph Generator Logo" class="h-10 rounded-full ">
-                <h1 class="text-3xl font-bold py-2">Kitto AI</h1>
-            </div>
-            <nav class="hidden md:flex space-x-6">
-                <a href="" class="text-white hover:text-gray-200 py-2">Home</a>
-                <a href="" class="text-white hover:text-gray-200 py-2">About</a>
-                <a href="" class="text-white hover:text-gray-200 py-2">Features</a>
-                <a href="{% url 'login' %}" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Login</a>
+<body class="font-sans transition-colors duration-200 bg-transparent text-white">
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-40 bg-black/80 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4 md:px-20">
+            <nav class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-white">KITTO AI</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-purple-400">Home</a>
+                    <a href="#" class="text-white hover:text-purple-400">Features</a>
+                    <a href="#" class="text-white hover:text-purple-400">Pricing</a>
+                    <a href="#" class="text-white hover:text-purple-400">Contact</a>
+                    <button class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-full hover:opacity-90 transition-colors">
+                        Get Started
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- <button id="themeToggle" class="p-2 rounded-full bg-gray-800 shadow-lg">
+                        <i class="fas fa-sun text-purple-400 hidden"></i>
+                        <i class="fas fa-moon text-blue-400 hidden block"></i>
+                    </button> -->
+                    <button class="text-white" id="mobileMenuButton">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </nav>
-    
-            <!-- Mobile menu toggle -->
-            <div class="md:hidden">
-                <button id="mobile-menu-toggle" class="text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+        </div>
+    </header>
+
+    <!-- Theme Toggle (Desktop) -->
+    <!-- <div class="fixed top-4 right-4 z-50 hidden md:block">
+        <button id="desktopThemeToggle" class="p-2 rounded-full bg-yellow-200 bg-gray-800 shadow-lg">
+            <i class="fas fa-sun  hidden"></i>
+            <i class="fas fa-moon  hidden block"></i>
+        </button>
+    </div> -->
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-30 hidden pt-20">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col space-y-4">
+                <a href="#" class="text-black text-lg">Home</a>
+                <a href="#" class="text-black text-lg">Features</a>
+                <a href="#" class="text-black text-lg">Pricing</a>
+                <a href="#" class="text-black text-lg">Contact</a>
+                <button class="bg-black px-6 py-2 rounded-ful hover:text-black hover:bg-white transition-colors">
+                    Get Started
                 </button>
             </div>
         </div>
-    
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-purple-700 text-white p-4 mt-4 space-y-4">
-            <a href="" class="block">Home</a>
-            <a href="" class="block">About</a>
-            <a href="" class="block">Features</a>
-            <a href="{% url 'login' %}" class="block bg-pink-600 hover:bg-pink-700 py-2 px-6 rounded-full font-semibold">Login</a>
-        </div>
-    </header>
-    
-    <!-- Main Welcome Section -->
-    <section class="text-center py-12 bg-purple-800 text-white">
-        <h2 class="text-4xl font-extrabold mb-8">Welcome to Kitto AI Writing Assistant</h2>
-        <p class="text-lg mb-12">Helping students craft unique, quality paragraphs that boost their writing skills.</p>
-        <a href="{% url 'login' %}" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Get Started</a>
-    </section>
+    </div>
 
-    <!-- Features Section -->
-    <section class="py-12 bg-gray-100">
-        <h3 class="text-3xl font-bold text-purple-800 text-center mb-6">Features of Kitto AI Writing Assistant</h3>
-        <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">AI-Powered Suggestions</h4>
-                <p>Generate unique, plagiarism-free paragraphs based on user input with the help of AI.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">Instant Results</h4>
-                <p>Get immediate results that help students save time and enhance writing quality.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">Multiple Writing Styles</h4>
-                <p>Choose from different writing styles and tones for varied use cases, from essays to creative writing.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rating and Features Ranking Section -->
-    <<!-- Rating and Features Ranking Section -->
-    <section class="py-12 bg-purple-50">
-        <h3 class="text-3xl font-bold text-purple-800 text-center mb-4">Rate Our Tool</h3>
-        <p class="text-lg text-center mb-6">Tell us how much you love Kitto AI Writing Assistant and how we can improve!</p>
-        
-        <!-- Rating and Ranking Section -->
-        <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Rating Component -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <label for="rating" class="block text-xl font-semibold text-purple-800 mb-2">Overall Rating:</label>
-                <div class="flex space-x-1 text-yellow-400">
-                    <input type="radio" name="rating" value="1" id="rating-1" class="rating-star">
-                    <input type="radio" name="rating" value="2" id="rating-2" class="rating-star">
-                    <input type="radio" name="rating" value="3" id="rating-3" class="rating-star">
-                    <input type="radio" name="rating" value="4" id="rating-4" class="rating-star">
-                    <input type="radio" name="rating" value="5" id="rating-5" class="rating-star">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hexagon-grid" id="hexagonGrid"></div>
+        <div class="hero-content container mx-auto px-4 py-20">
+            <div class="text-center mt-16">
+                <h1 class="text-4xl  md:text-6xl font-bold text-white mb-6">
+                    Create Amazing Paragraphs Instantly
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                    Our AI-powered tool helps you generate high-quality paragraphs in seconds. Perfect for writers, students, and anyone in need of creative content.
+                </p>
+                <div class="max-w-2xl mx-auto">
+                    <form id="generateForm" class="relative mb-8">
+                        <input type="text" 
+                               name="topic"
+                               placeholder="Enter your topic here..." 
+                               class="hero-input w-full px-6 py-4 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <button type="submit" class="hero-button absolute right-2 top-2 px-6 py-2 rounded-full transition-all">
+                            Generate
+                        </button>
+                    </form>
+                    <div id="result" class="bg-gray-800/50 invisible p-6 rounded-xl shadow-lg text-left">
+                        <!-- Generated content will be inserted here -->
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Features Ranking -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">Ease of Use</h4>
-                <input type="range" name="ease_of_use" min="1" max="5" value="3" class="w-full">
+    
+
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
+                Why Choose Our Tool?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class=" bg-white text-black border-2 border-black hover:bg-black hover:text-white p-8 rounded-xl shadow-lg">
+                    <div class=" text-4xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Smart Technology</h3>
+                    <p class=" ">
+                        Utilizes advanced AI algorithms to provide you with relevant content.
+                    </p>
+                </div>
+                <div class=" bg-white text-black border-2 border-black hover:bg-black hover:text-white p-8 rounded-xl shadow-lg">
+                    <div class=" text-4xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Time-Saving</h3>
+                    <p class=" ">
+                        Generate paragraphs in seconds, saving you valuable time.
+                    </p>
+                </div>
+                <div class=" bg-white text-black border-2 border-black hover:bg-black hover:text-white p-8 rounded-xl shadow-lg">
+                    <div class=" text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">User-Friendly</h3>
+                    <p class=" ">
+                        Simple and intuitive interface designed for everyone.
+                    </p>
+                </div>
+               
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">Speed</h4>
-                <input type="range" name="speed" min="1" max="5" value="4" class="w-full">
+        </div>
+    </section>
+
+    <!-- What Our Users Say Section
+    <section class="py-20 ">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-black ">
+                What Our Users Say
+            </h2>
+            <div class="owl-carousel owl-theme" id="testimonials">
+                <div class="item">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <p class="text-black mb-4">"This tool has revolutionized my writing process. It's like having a personal assistant!"</p>
+                        <p class="font-bold ">- Sarah J.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bg-white border-2 border-black  hover:bg-black  p-6 rounded-xl shadow-lg">
+                        <p class="  mb-4">"As a student, this has been invaluable for my essays. Highly recommended!"</p>
+                        <p class="font-bold ">- Mike T.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bg-white  p-6 rounded-xl shadow-lg">
+                        <p class=" mb-4">"The quality of the generated content is impressive. It's a game-changer for content creators."</p>
+                        <p class="font-bold ">- Emily R.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bg-white  p-6 rounded-xl shadow-lg">
+                        <p class=" mb-4">"I've tried many AI writing tools, but this one stands out for its accuracy and relevance."</p>
+                        <p class="font-bold ">- David L.</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h4 class="text-xl font-semibold text-purple-800 mb-2">Accuracy of Suggestions</h4>
-                <input type="range" name="accuracy" min="1" max="5" value="5" class="w-full">
+        </div>
+    </section> -->
+
+    <!-- Latest Generations Section -->
+    <section class="py-20  bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white ">
+                Latest Generations
+            </h2>
+            <div class="owl-carousel owl-theme" id="latestGenerations">
+                <div class="item">
+                    <div class=" bg-gray-800 mx-4 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4  text-white">The Future of AI</h3>
+                        <div class=" text-white">
+                            <p>Artificial Intelligence is rapidly evolving, transforming industries and reshaping our daily lives. From autonomous vehicles to personalized healthcare, AI's potential seems boundless. As we stand on the brink of this technological revolution, it's crucial to consider both the opportunities and challenges that lie ahead.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class=" bg-gray-800 mx-4 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4  text-white">Sustainable Living</h3>
+                        <div class=" text-white">
+                            <p>Embracing sustainable living is no longer a choice, but a necessity. As climate change continues to impact our planet, individuals and communities are finding innovative ways to reduce their carbon footprint. From zero-waste lifestyles to renewable energy adoption, every small step contributes to a greener future.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class=" bg-gray-800 mx-4 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4  text-white">The Art of Mindfulness</h3>
+                        <div class=" text-white">
+                            <p>In our fast-paced world, mindfulness has emerged as a powerful tool for maintaining mental health and well-being. This ancient practice, rooted in Buddhist traditions, has found its place in modern psychology and everyday life. By focusing on the present moment, individuals can reduce stress, improve concentration, and cultivate a greater sense of peace.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Feedback Section -->
-    <section class="py-12 bg-gray-100">
-        <h3 class="text-3xl font-bold text-purple-800 text-center mb-6">Your Suggestions</h3>
-        <p class="text-lg text-center mb-6">We value your feedback! Help us make AI Paragraph Generator even better.</p>
-        
-        <form method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg" id="feedbackForm" onsubmit="return validateForm()">
-            {% csrf_token %}
-            <div class="mb-4">
-                <label for="name" class="block font-semibold mb-2">Your Name:</label>
-                <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-md" required>
-            </div>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-black ">
+                We Value Your Feedback
+            </h2>
+            <p class="text-center text-black mb-12">
+                Your suggestions help us improve our tool. Please share your thoughts!
+            </p>
+            <form class="max-w-xl mx-auto">
+                <input type="text" 
+                       placeholder="Your Name" 
+                       class="w-full mb-4 px-4 py-3 rounded-lg bg-white  text-black  border  border-gray-600 focus:outline-none focus:ring-2 focus:ring-black">
+                <textarea placeholder="Write your feedback here..." 
+                          class="w-full mb-4 px-4 py-3 rounded-lg bg-white  text-black  border  border-gray-600 focus:outline-none focus:ring-2 focus:ring-black"
+                          rows="4"></textarea>
+                <button class="w-full bg-black  px-6 py-3 rounded-lg hover:bg-white hover:border-2 hover:border-black hover:text-black transition-colors">
+                    Submit Feedback
+                </button>
+            </form>
+        </div>
+    </section>
 
-            <div class="mb-4">
-                <label for="suggestion" class="block font-semibold mb-2">Your Suggestion:</label>
-                <textarea id="suggestion" name="suggestion" rows="4" class="w-full p-3 border border-gray-300 rounded-md" required></textarea>
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-black ">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-6">Stay Connected</h2>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="#" class="text-white hover: transition-colors">
+                    <i class="fab fa-facebook text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover: transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover: transition-colors">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover: transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
             </div>
-
-            <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-full font-semibold">Submit</button>
-        </form>
+            <p class="text-center text-white mt-8 mb-8">
+                Subscribe to our newsletter for the latest updates and offers!
+            </p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" 
+                       placeholder="Your Email" 
+                       class="flex-1 px-4 py-3 rounded-l-lg bg-gray-800 text-white border border-white focus:outline-none focus:ring-2 focus:ring-white">
+                <button class="px-6 py-3 text-black bg-white rounded-r-lg hover: transition-colors">
+                    Subscribe
+                </button>
+            </div>
+            
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-purple-800 text-white text-center py-6">
-        <p>&copy; 2024 AI Paragraph Generator. All rights reserved.</p>
+    <footer class="py-6 bg-gray-800 text-white text-center">
+        <p>© 2024 KITTO AI. All rights reserved.</p>
+        <p class="text-sm mt-2">
+            Powered by <strong class="text-orange-400 hover:underline">SS Creation</strong>.
+        </p>
+        <p class="text-xs text-gray-500 mt-6">
+        Made with ❤️ by <span class="text-white font-medium">Sujoy Das & Sagar Kundu</span>
+    </p>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
-        // Toggle mobile menu
-        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        // // Theme Toggle
+        // const themeToggle = document.getElementById('themeToggle');
+        // const desktopThemeToggle = document.getElementById('desktopThemeToggle');
+        // const html = document.documentElement;
+
+        // // Check for saved theme preference
+        // if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        //     html.classList.add('dark');
+        // } else {
+        //     html.classList.remove('dark');
+        // }
+
+        // function toggleTheme() {
+        //     html.classList.toggle('dark');
+        //     localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        // }
+
+        // themeToggle.addEventListener('click', toggleTheme);
+        // desktopThemeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        function validateForm() {
-    const name = document.getElementById("name").value.trim();
-    const suggestion = document.getElementById("suggestion").value.trim();
-    const rating = document.querySelector('input[name="rating"]:checked');
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
 
-    if (name === "") {
-        alert("Please enter your name.");
-        return false;
-    }
-    if (suggestion === "") {
-        alert("Please provide a suggestion.");
-        return false;
-    }
-    if (!rating) {
-        alert("Please select a rating.");
-        return false;
-    }
-    return true;
-}
+        // Initialize Owl Carousel for testimonials
+        $(document).ready(function(){
+            $("#testimonials").owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                nav: false,
+                dots: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
 
-    
-function error_alert(){
-    alert("I do not get much time to implement this feature.\nHope You understand I will implement it later. ")
-    return false;
-}
+        // Initialize Owl Carousel for latest generations
+        $(document).ready(function(){
+            $("#latestGenerations").owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                nav: false,
+                dots: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+
+        // Form submission and content generation
+        $(document).ready(function() {
+            $('#generateForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const submitButton = $(this).find('button[type="submit"]');
+                submitButton.prop('disabled', true).text('Generating...');
+                
+                $.ajax({
+                    url: '{% url "generate_paragraph" %}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                         // Update the content of the #result div with the generated paragraph
+                        document.getElementById('result').innerHTML = response.content;
+
+                        // Make the #result div visible
+                        const resultDiv = document.getElementById('result');
+                        resultDiv.classList.remove('invisible');
+                        resultDiv.classList.add('block');
+                    },
+                    error: function(xhr) {
+                        $('#result').html(` 
+                            <div class="result-error">
+                                <p class="text-red-600 text-red-400">Error: ${xhr.responseJSON?.message || 'Something went wrong'}</p>
+                            </div>
+                        `);
+                    },
+                    complete: function() {
+                        submitButton.prop('disabled', false).text('Generate');
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('hexagonGrid');
+            const columns = Math.ceil(window.innerWidth / 104);
+            const rows = Math.ceil(window.innerHeight / 119);
+            
+            for (let i = 0; i < rows * columns; i++) {
+                const hexagon = document.createElement('div');
+                hexagon.className = 'hexagon';
+                grid.appendChild(hexagon);
+            }
+
+            const hexagons = document.querySelectorAll('.hexagon');
+
+            function getNeighbors(index, cols) {
+                const row = Math.floor(index / cols);
+                const col = index % cols;
+                return [
+                    index - cols,
+                    index + cols,
+                    index - 1,
+                    index + 1,
+                    index - cols - 1,
+                    index - cols + 1
+                ];
+            }
+
+            function activateHexagon(index) {
+                const hexagon = hexagons[index];
+                if (hexagon) {
+                    hexagon.classList.add('active');
+                    const neighbors = getNeighbors(index, columns);
+                    neighbors.forEach((neighborIndex, i) => {
+                        if (hexagons[neighborIndex]) {
+                            setTimeout(() => {
+                                hexagons[neighborIndex].style.transform = 'scale(1.1)';
+                                setTimeout(() => {
+                                    hexagons[neighborIndex].style.transform = 'scale(1)';
+                                }, 300);
+                            }, i * 50);
+                        }
+                    });
+                    setTimeout(() => {
+                        hexagon.classList.remove('active');
+                    }, 2000);
+                }
+            }
+
+            function randomHexagonEffect() {
+                const randomIndex = Math.floor(Math.random() * hexagons.length);
+                activateHexagon(randomIndex);
+            }
+
+            setInterval(randomHexagonEffect, 3000);
+
+            hexagons.forEach((hex, index) => {
+                hex.addEventListener('mouseover', () => {
+                    activateHexagon(index);
+                });
+            });
+        });
     </script>
-
 </body>
 </html>
