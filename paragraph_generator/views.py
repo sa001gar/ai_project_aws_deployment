@@ -166,17 +166,17 @@ def generate_paragraph_index(request):
 
 
 # Dashboard view
-@login_required
+# @login_required
 def dashboard(request):
-    user_content = GeneratedContent.objects.filter(user=request.user)
-    usage = UserApiUsage.objects.get_or_create(user=request.user)[0]
+    # user_content = GeneratedContent.objects.filter(user=request.user)
+    # usage = UserApiUsage.objects.get_or_create(user=request.user)[0]
     
-    context = {
-        'user_content': user_content,
-        'remaining_requests': 50 - usage.daily_usage,
-        'total_generations': user_content.count()
-    }
-    return render(request, 'paragraph_generator/dashboard.html', context)
+    # context = {
+    #     'user_content': user_content,
+    #     'remaining_requests': 50 - usage.daily_usage,
+    #     'total_generations': user_content.count()
+    # }
+    return render(request, 'paragraph_generator/dashboard.html')
 
 
 # Logout view
