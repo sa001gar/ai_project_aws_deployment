@@ -188,7 +188,7 @@
                     <a href="#" class="text-white hover:text-purple-400">Features</a>
                     <a href="#" class="text-white hover:text-purple-400">Pricing</a>
                     <a href="#" class="text-white hover:text-purple-400">Contact</a>
-                    <button class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-full hover:opacity-90 transition-colors">
+                    <button onclick="get_started()" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-full hover:opacity-90 transition-colors">
                         Get Started
                     </button>
                 </div>
@@ -234,7 +234,7 @@
         <div class="hero-content container mx-auto px-4 py-20">
             <div class="text-center mt-16">
                 <h1 class="text-4xl  md:text-6xl font-bold text-white mb-6">
-                    Create Amazing Paragraphs Instantly
+                    Create Amazing Writings Instantly
                 </h1>
                 <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                     Our AI-powered tool helps you generate high-quality paragraphs in seconds. Perfect for writers, students, and anyone in need of creative content.
@@ -442,6 +442,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
+        function get_started() {
+            window.location.href = '/dashboard';    
+        }
+
+
         // // Theme Toggle
         // const themeToggle = document.getElementById('themeToggle');
         // const desktopThemeToggle = document.getElementById('desktopThemeToggle');
