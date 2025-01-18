@@ -25,6 +25,59 @@
     <meta name="twitter:image" content="{% static 'images/logo.png' %}">
     <meta name="twitter:site" content="@YourTwitterHandle">
 
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        .chat-container {
+            height: calc(100vh - 180px);
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        .loading-dots::after {
+            content: '...';
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+        }
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 2px;
+        }
+        .neon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(91, 33, 182, 0.1) 0%, rgba(0, 0, 0, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(13, 148, 136, 0.1) 0%, rgba(0, 0, 0, 0) 40%);
+        }
+        .sidebar-mobile {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-mobile.active {
+            transform: translateX(0);
+        }
+    </style>
     <!-- Structured Data for rich snippets -->
     <script type="application/ld+json">
     {
@@ -48,48 +101,221 @@
     <!-- Link to Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/paragraph_generator/dashboard.css' %}">
 </head>
-<body>
-    <div class="container">
-        <div class="card">
-            <!-- Main Heading (h1) optimized for SEO -->
-            <h1 class="header">Your AI-Generated Content Dashboard</h1>
-            <span class="username">Hello, {{ user.username }}! Welcome to your personalized content dashboard.</span>
-            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+<body class="bg-gray-900 text-white min-h-screen overflow-x-hidden">
+    <div class="neon-bg"></div>
 
-            <!-- Stats Section with subheading (h2) for SEO -->
-            <div class="stats">
-                <h2 class="font-semibold">Daily Usage Stats</h2>
-                <p>Remaining requests: {{ remaining_requests }}/50</p>
-                <p>Total generations: {{ total_generations }}</p>
-            </div>
-
-            <div class="space-y-6">
-                <!-- Dynamic content generation with loop (h3 for individual pieces of content) -->
-                {% for content in user_content %}
-                <div class="content">
-                    <div class="content-header">
-                        <h3 class="font-semibold">{{ content.topic }}</h3>
-                        <span class="content-info">{{ content.created_at|date:"M d, Y H:i" }}</span>
-                    </div>
-                    <p>{{ content.content }}</p>
-                    <div class="content-info">
-                        <p>Grade Level: {{ content.grade_level }}</p>
-                        <p>Style: {{ content.style }}</p>
-                        <p>Tone: {{ content.tone }}</p>
-                        <p>Word Count: {{ content.word_count }}</p>
-                    </div>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar-mobile fixed inset-y-0 left-0 w-full md:w-64 bg-gray-800 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50">
+        <div class="flex flex-col h-full">
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold">Kitto AI</span>
+                    <button id="closeSidebar" class="md:hidden p-2 rounded-md hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-                {% empty %}
-                <p class="text-gray-500">No content generated yet. Start creating now!</p>
-                {% endfor %}
             </div>
-
-            <!-- Call to action (h2) for generating more content -->
-            <a href="{% url 'generate_paragraph' %}" class="generate-button">Generate More Content</a>
+            <div class="flex-1 overflow-y-auto scrollbar-custom p-4">
+                <button class="w-full flex items-center justify-between gap-2 px-3 py-2 bg-gray-700 rounded hover:bg-gray-600 transition-colors mb-4">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        New chat
+                    </span>
+                </button>
+                <div class="space-y-2" id="chatHistory"></div>
+            </div>
+            <div class="p-4 border-t border-gray-700">
+                <a href="login.html" class="block w-full text-center px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-900 transition-colors mb-2">Login</a>
+                <a href="signup.html" class="block w-full text-center px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-900 transition-colors">Sign Up</a>
+            </div>
         </div>
     </div>
 
-    <!-- Image alt text for SEO (using alt for accessibility and ranking) -->
-    <img src="{% static 'images/logo.jpg' %}" alt="AI Paragraph Generator Dashboard - Content Management for Students and Professionals" style="display:none;">
+    <!-- Main Content -->
+    <div class="md:ml-64 min-h-screen flex flex-col">
+        <!-- Mobile Header -->
+        <header class="md:hidden bg-gray-800 p-4 flex items-center justify-between">
+            <button id="menuToggle" class="p-2 rounded-md hover:bg-gray-700">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <span class="text-xl font-bold">Kitto AI</span>
+        </header>
+
+        <!-- Content Area -->
+        <main class="flex-1 p-4">
+            <!-- Initial View -->
+            <div id="initialView" class="text-center py-8">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 animate-fade-in">
+                    What can I help you ship?
+                </h1>
+                <!-- Feature Buttons -->
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Score Me
+                        </button>
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Help me write
+                        </button>
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Summarize Text
+                        </button>
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Suggest Topic
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Improve Writing
+                        </button>
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Story Writing
+                        </button>
+                        <button class="feature-btn px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition-colors animate-fade-in">
+                            Write a Paragraph
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div id="chatInterface" class="hidden">
+                <div id="chatResults" class="chat-container space-y-6 scrollbar-custom pb-4"></div>
+            </div>
+        </main>
+
+        <!-- Input Section -->
+        <div class="border-t border-gray-800 p-4 bg-gray-900">
+            <div class="max-w-3xl mx-auto relative">
+                <form id="chatForm" class="relative">
+                    <div class="relative flex items-center">
+                        <input 
+                            type="text" 
+                            id="chatInput"
+                            class="w-full bg-gray-800 text-white rounded-full border border-gray-700 py-3 px-4 pr-12 focus:outline-none focus:border-blue-500"
+                            placeholder="Ask Kitto AI a question..."
+                        >
+                        <button type="submit" class="absolute right-2 p-2 text-gray-400 hover:text-white disabled:opacity-50" disabled>
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center mt-2">
+                    <small class="text-gray-500">Kitto AI can make mistakes. Consider checking important information.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dummy chat history data
+        const chatHistory = [
+            "HTML Dynamic Result Update",
+            "Improving Kitto AI",
+            "Last AI Conversation",
+            "Subject List Summary",
+            "Electricity Theft Dashboard",
+            "Django Queue Management System",
+            "Footer Design Assistance"
+        ];
+
+        // DOM elements
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menuToggle');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const chatHistoryContainer = document.getElementById('chatHistory');
+        const chatResults = document.getElementById('chatResults');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const initialView = document.getElementById('initialView');
+        const chatInterface = document.getElementById('chatInterface');
+
+        // Populate chat history
+        chatHistory.forEach(title => {
+            const div = document.createElement('div');
+            div.className = 'py-2 px-3 hover:bg-gray-700 rounded-md cursor-pointer text-sm flex items-center gap-3';
+            div.innerHTML = `
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+                ${title}
+            `;
+            chatHistoryContainer.appendChild(div);
+        });
+
+        // Sidebar toggle functionality
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        // Feature buttons functionality
+        document.querySelectorAll('.feature-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                initialView.classList.add('hidden');
+                chatInterface.classList.remove('hidden');
+                chatInput.value = button.textContent.trim();
+                chatInput.focus();
+            });
+        });
+
+        // Handle form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (message) {
+                // Hide initial view if visible
+                initialView.classList.add('hidden');
+                chatInterface.classList.remove('hidden');
+
+                // Add user message
+                addMessage('user', message);
+
+                // Clear input
+                chatInput.value = '';
+                chatForm.querySelector('button[type="submit"]').disabled = true;
+
+                // Simulate AI response
+                setTimeout(() => {
+                    addMessage('assistant', `This is a simulated response to: "${message}"`);
+                    scrollToBottom();
+                }, 1000);
+            }
+        });
+
+        // Enable/disable submit button based on input
+        chatInput.addEventListener('input', function() {
+            const submitButton = chatForm.querySelector('button[type="submit"]');
+            submitButton.disabled = !this.value.trim();
+        });
+
+        // Function to add a message to the chat
+        function addMessage(role, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`;
+            messageDiv.innerHTML = `
+                <div class="max-w-2xl ${role === 'user' ? 'bg-blue-600' : 'bg-gray-700'} rounded-lg p-4 text-sm">
+                    <p class="whitespace-pre-wrap">${content}</p>
+                </div>
+            `;
+            chatResults.appendChild(messageDiv);
+        }
+
+        // Function to scroll chat to bottom
+        function scrollToBottom() {
+            chatResults.scrollTop = chatResults.scrollHeight;
+        }
+    </script>
 </body>
 </html>

@@ -97,7 +97,7 @@ def generate_paragraph_index(request):
             }, status=400)
         
         # Construct the prompt
-        prompt = f"""Generate an educational paragraph about {topic}.
+        prompt = f"""Generate about {topic}.
         Requirements:
         - Generate in English Language
         - Appropriate for indian students
