@@ -48,7 +48,7 @@ LOGGING = {
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['sagarkundu.live','www.sagarkundu.live','127.0.0.1', 'localhost','13.200.157.135','kitto-ai.sagarkundu.live','events.computersciencemancoll.in']
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['https://sagarkundu.live', 'https://www.sagarkundu.live','https://kitto-ai.sagarkundu.live','https://events.computersciencemancoll.in']
 
