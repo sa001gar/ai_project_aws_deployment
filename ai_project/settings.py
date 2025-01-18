@@ -103,23 +103,23 @@ WSGI_APPLICATION = 'ai_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("db_name"),
-        'USER': os.getenv("db_username"),
-        'PASSWORD': os.getenv("db_password"),
-        'HOST': os.getenv("db_host"),
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv("db_name"),
+#         'USER': os.getenv("db_username"),
+#         'PASSWORD': os.getenv("db_password"),
+#         'HOST': os.getenv("db_host"),
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -174,15 +174,15 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = '/'
 
 
-AWS_ACCESS_KEY_ID = os.getenv("s3_access_key")
-AWS_SECRET_ACCESS_KEY = os.getenv("s3_secret_access_key")
-AWS_STORAGE_BUCKET_NAME = os.getenv("s3_bucket_name")
-# AWS_S3_SIGNATURE_NAME = 's3v4',
-AWS_S3_REGION_NAME = os.getenv("s3_region_name")
-# AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_S3_VERITY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_ACCESS_KEY_ID = os.getenv("s3_access_key")
+# AWS_SECRET_ACCESS_KEY = os.getenv("s3_secret_access_key")
+# AWS_STORAGE_BUCKET_NAME = os.getenv("s3_bucket_name")
+# # AWS_S3_SIGNATURE_NAME = 's3v4',
+# AWS_S3_REGION_NAME = os.getenv("s3_region_name")
+# # AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# AWS_S3_VERITY = True
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

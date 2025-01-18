@@ -102,7 +102,7 @@ def generate_paragraph_index(request):
         - Generate in English Language
         - Appropriate for indian students
         - Write in a Indian Educator's and Student's writing style
-        - Write in a formal tone and give the precise answer only."""
+        - Write in a formal tone and give the answer only.Not other detailing related stuff"""
         system="You are a AI Writing assistant, who helps students to write paragraph instantly and efficiently."
         
 #         # Make the API call
