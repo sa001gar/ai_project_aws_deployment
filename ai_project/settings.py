@@ -25,7 +25,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # Production Server
+DEBUG = False # Production Server
 
 LOGGING = {
     'version': 1,
@@ -48,7 +48,7 @@ LOGGING = {
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['13.126.182.7','sagarkundu.live','www.sagarkundu.live','kitto-ai.sagarkundu.live','events.computersciencemancoll.in','localhost','127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://sagarkundu.live', 'https://www.sagarkundu.live','https://kitto-ai.sagarkundu.live','https://events.computersciencemancoll.in']
 
