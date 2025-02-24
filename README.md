@@ -1,7 +1,7 @@
-# AI Paragraph Generator
+# Kitto AI
 
-**Project Name**: AI Paragraph Generator  
-**Live Site**: [sagarkundu.live](https://sagarkundu.live)
+**Project Name**: Kitto AI  
+**Live Site**: [kitto-ai.sagarkundu.live](https://kitto-ai.sagarkundu.live)
 
 ## Table of Contents
 
